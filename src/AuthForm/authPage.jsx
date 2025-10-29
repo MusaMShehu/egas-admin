@@ -285,7 +285,7 @@ const AuthPage = () => {
       
       // Redirect to dashboard after successful login
       setTimeout(() => {
-        window.location.href = '/dashboard';
+        window.location.href = '/admin';
       }, 1000);
     } catch (err) {
       setMessage({ 

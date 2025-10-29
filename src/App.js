@@ -50,12 +50,12 @@ function App() {
          
 
 
-          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
 
           {/* Admin Routes (can also be wrapped with ProtectedRoute if only admins allowed) */}
-          <Route path="/" element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<AdminDashboard />} />
             <Route path="users" element={<UserManagement />} />
