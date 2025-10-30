@@ -13,7 +13,7 @@ const SavedReports = ({ onReportSelect }) => {
 
   const loadSavedReports = async () => {
     try {
-      const response = await fetch('/api/admin/reports/saved');
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/saved');
       const data = await response.json();
       if (response.ok) {
         setSavedReports(data);
@@ -38,7 +38,7 @@ const SavedReports = ({ onReportSelect }) => {
     if (!window.confirm('Are you sure you want to delete this saved report?')) return;
 
     try {
-      const response = await fetch(`/api/admin/reports/saved/${reportId}`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/reports/saved/${reportId}`, {
         method: 'DELETE'
       });
 
@@ -67,7 +67,7 @@ const SavedReports = ({ onReportSelect }) => {
         config: {}
       };
 
-      const response = await fetch('/api/admin/reports/saved', {
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/saved', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

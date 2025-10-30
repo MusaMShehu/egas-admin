@@ -12,7 +12,7 @@ const RecentOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/v1/admin/dashboard");
+      const response = await fetch("https://egas-server-1.onrender.com/api/v1/admin/dashboard");
       const data = await response.json();
       setOrders(data.recentOrders || [] );
     } catch (error) {

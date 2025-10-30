@@ -19,7 +19,7 @@ const RealTimeMetrics = ({
     
     try {
       setIsLoading(true);
-      const response = await fetch('/api/admin/reports/realtime-metrics');
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/realtime-metrics');
       const result = await response.json();
       
       if (response.ok) {

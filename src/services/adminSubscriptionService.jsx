@@ -3,7 +3,7 @@ import axios from "axios";
 // =============================
 // ✅ Configuration
 // =============================
-const API_BASE_URL = "http://localhost:5000"; 
+const API_BASE_URL = "https://egas-server-1.onrender.com"; 
 
 // ✅ Safely get token from localStorage
 const getToken = () => {

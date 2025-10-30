@@ -78,7 +78,7 @@ const Reports = () => {
     }
 
     const response = await fetch(
-      `http://localhost:5000/api/v1/admin/reports/${activeReport}?${queryParams}`,
+      `https://egas-server-1.onrender.com/api/v1/admin/reports/${activeReport}?${queryParams}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const Reports = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/api/v1/admin/reports/realtime-metrics',
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/realtime-metrics',
          {
         headers: {
           "Content-Type": "application/json",

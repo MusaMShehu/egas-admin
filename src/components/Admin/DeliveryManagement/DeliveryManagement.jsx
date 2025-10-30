@@ -44,7 +44,7 @@ const AdminDeliveryManagement = () => {
         ...filters,
       }).toString();
 
-      const response = await fetch(`http://localhost:5000/api/v1/admin/delivery?${queryParams}`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery?${queryParams}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -64,7 +64,7 @@ const AdminDeliveryManagement = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/admin/delivery/stats', {
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/delivery/stats', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -81,7 +81,7 @@ const AdminDeliveryManagement = () => {
 
 const fetchAgents = async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/v1/admin/users?role=delivery', {
+    const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/users?role=delivery', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -117,7 +117,7 @@ const fetchAgents = async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/delivery/${selectedDelivery._id}/assign`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedDelivery._id}/assign`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ const fetchAgents = async () => {
 
   const generateSchedules = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/admin/delivery/generate-schedules', {
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/delivery/generate-schedules', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

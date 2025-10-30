@@ -32,7 +32,7 @@ const ReportScheduler = ({
 
   const fetchSchedules = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/reports/schedules');
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/schedules');
       const data = await response.json();
       if (response.ok) {
         setSchedules(data);
@@ -44,7 +44,7 @@ const ReportScheduler = ({
 
   const fetchRecipients = async () => {
     try {
-      const response = await fetch('/api/admin/reports/recipients');
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/recipients');
       const data = await response.json();
       if (response.ok) {
         setAvailableRecipients(data);
@@ -100,7 +100,7 @@ const ReportScheduler = ({
         }
       };
 
-      const response = await fetch('/api/admin/reports/schedules', {
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/reports/schedules', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ const ReportScheduler = ({
 
   const handleToggleSchedule = async (scheduleId, enabled) => {
     try {
-      const response = await fetch(`/api/admin/reports/schedules/${scheduleId}`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/reports/schedules/${scheduleId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ const ReportScheduler = ({
     if (!window.confirm('Are you sure you want to delete this schedule?')) return;
 
     try {
-      const response = await fetch(`/api/admin/reports/schedules/${scheduleId}`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/reports/schedules/${scheduleId}`, {
         method: 'DELETE'
       });
 

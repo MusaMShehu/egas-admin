@@ -27,7 +27,7 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       // Replace with actual API call
-      const statsResponse = await fetch("http://localhost:5000/api/v1/admin/dashboard");
+      const statsResponse = await fetch("https://egas-server-1.onrender.com/api/v1/admin/dashboard");
       const statsData = await statsResponse.json();
       setStats(statsData);
     } catch (error) {

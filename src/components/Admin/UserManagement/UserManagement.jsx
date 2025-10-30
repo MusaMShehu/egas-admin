@@ -74,7 +74,7 @@ const UserManagement = () => {
       });
 
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/users?${params}`,
+        `https://egas-server-1.onrender.com/api/v1/admin/users?${params}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ const UserManagement = () => {
   const handleCreateUser = async (userData) => {
     try {
       const token = getAuthToken();
-      const response = await fetch("http://localhost:5000/api/v1/admin/users", {
+      const response = await fetch("https://egas-server-1.onrender.com/api/v1/admin/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -152,7 +152,7 @@ const UserManagement = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/users/${userId}`,
+        `https://egas-server-1.onrender.com/api/v1/admin/users/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -193,7 +193,7 @@ const UserManagement = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/users/${userId}`,
+        `https://egas-server-1.onrender.com/api/v1/admin/users/${userId}`,
         {
           method: "DELETE",
           headers: {
@@ -235,7 +235,7 @@ const UserManagement = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        "http://localhost:5000/api/v1/admin/users/bulk/delete",
+        "https://egas-server-1.onrender.com/api/v1/admin/users/bulk/delete",
         {
           method: "DELETE",
           headers: {
@@ -270,7 +270,7 @@ const UserManagement = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        "http://localhost:5000/api/v1/admin/users/bulk/status",
+        "https://egas-server-1.onrender.com/api/v1/admin/users/bulk/status",
         {
           method: "PATCH",
           headers: {
@@ -307,7 +307,7 @@ const UserManagement = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/users/${userId}/status`,
+        `https://egas-server-1.onrender.com/api/v1/admin/users/${userId}/status`,
         {
           method: "PATCH",
           headers: {
@@ -346,7 +346,7 @@ const UserManagement = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/users/${userId}/wallet`,
+        `https://egas-server-1.onrender.com/api/v1/admin/users/${userId}/wallet`,
         {
           method: "PATCH",
           headers: {

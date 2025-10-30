@@ -68,7 +68,7 @@ const OrderManagement = () => {
       setLoading(true);
       const token = localStorage.getItem("token")?.replace(/^"|"$/g, "");
 
-      const response = await fetch("http://localhost:5000/api/v1/admin/orders", {
+      const response = await fetch("https://egas-server-1.onrender.com/api/v1/admin/orders", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ const OrderManagement = () => {
     const token = localStorage.getItem("token")?.replace(/^"|"$/g, "");
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/orders/${orderId}/status`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/orders/${orderId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const OrderManagement = () => {
       const token = localStorage.getItem("token")?.replace(/^"|"$/g, "");
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/orders/${orderId}/payment-status`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/orders/${orderId}/payment-status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ const OrderManagement = () => {
 
   const updateTracking = async (orderId, trackingData) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/orders/${orderId}/tracking`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/orders/${orderId}/tracking`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -206,7 +206,7 @@ const OrderManagement = () => {
     const token = localStorage.getItem("token")?.replace(/^"|"$/g, "");
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/orders/bulk-status`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/orders/bulk-status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

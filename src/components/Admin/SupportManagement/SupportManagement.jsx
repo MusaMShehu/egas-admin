@@ -18,7 +18,7 @@ const SupportManagement = () => {
   });
 
   // Base API URL - adjust based on your environment
-  const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = 'https://egas-server-1.onrender.com';
 
   // Get auth token from localStorage
   const getAuthToken = () => {

@@ -32,12 +32,12 @@ const getAuthHeaders = () => ({
   Authorization: "Bearer " + localStorage.getItem("token"),
 });
 
-const SUB_URL = 'http://localhost:5000/api/v1/admin/subscription-plans';
+const SUB_URL = 'https://egas-server-1.onrender.com/api/v1/admin/subscription-plans';
 
 // Inline API functions for Products
 const productAPI = {
   getAllProducts: async () => {
-    const response = await fetch('http://localhost:5000/api/v1/admin/products', {
+    const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/products', {
       headers: { ...getAuthHeaders() },
     });
     if (!response.ok) throw new Error('Failed to fetch products');
@@ -45,7 +45,7 @@ const productAPI = {
   },
 
   createProduct: async (productData) => {
-    const response = await fetch('http://localhost:5000/api/v1/admin/products', {
+    const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const productAPI = {
   },
 
   updateProduct: async (productId, productData) => {
-    const response = await fetch(`http://localhost:5000/api/v1/admin/products/update-product/${productId}`, {
+    const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/products/update-product/${productId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const productAPI = {
   },
 
   deleteProduct: async (productId) => {
-    const response = await fetch(`http://localhost:5000/api/v1/admin/products/delete-product/${productId}`, {
+    const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/products/delete-product/${productId}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -91,7 +91,7 @@ const productAPI = {
     formData.append("photo", file); // MUST match backend field name
 
     const response = await fetch(
-      `http://localhost:5000/api/v1/admin/products/${productId}/photo`,
+      `https://egas-server-1.onrender.com/api/v1/admin/products/${productId}/photo`,
       {
         method: "PUT",
         headers: {

@@ -42,7 +42,7 @@ const DeliveryAgentPortal = () => {
       // Fetch deliveries for the logged-in agent
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/delivery/agent/my-deliveries?status=${status}`,
+        `https://egas-server-1.onrender.com/api/v1/admin/delivery/agent/my-deliveries?status=${status}`,
         {
           method: "GET",
           headers: {
@@ -74,7 +74,7 @@ const DeliveryAgentPortal = () => {
       
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/api/v1/admin/delivery/agent/my-deliveries?status=all`,
+        `https://egas-server-1.onrender.com/api/v1/admin/delivery/agent/my-deliveries?status=all`,
         {
           method: "GET",
           headers: {
@@ -121,7 +121,7 @@ const DeliveryAgentPortal = () => {
 
   const handleAcceptDelivery = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/delivery/${orderId}/accept`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderId}/accept`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -140,7 +140,7 @@ const DeliveryAgentPortal = () => {
 
   const handleMarkOutForDelivery = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/delivery/${orderId}/out-for-delivery`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderId}/out-for-delivery`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -159,7 +159,7 @@ const DeliveryAgentPortal = () => {
 
   const handleMarkDelivered = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/delivery/${selectedOrder._id}/delivered`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedOrder._id}/delivered`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ const DeliveryAgentPortal = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/admin/delivery/${selectedOrder._id}/failed`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedOrder._id}/failed`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

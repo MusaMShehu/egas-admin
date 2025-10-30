@@ -84,7 +84,7 @@ const ExportOptions = ({
         config: JSON.stringify(exportData)
       });
 
-      const response = await fetch(`/api/admin/reports/export/${format}?${queryParams}`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/reports/export/${format}?${queryParams}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

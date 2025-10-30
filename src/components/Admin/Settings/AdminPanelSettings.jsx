@@ -20,7 +20,7 @@ const Settings = () => {
   const fetchSettings = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/admin/settings');
+      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/settings');
       const data = await response.json();
       
       if (response.ok) {
@@ -39,7 +39,7 @@ const Settings = () => {
     try {
       setSaveStatus({ ...saveStatus, [section]: 'saving' });
       
-      const response = await fetch(`/api/admin/settings/${section}`, {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/settings/${section}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

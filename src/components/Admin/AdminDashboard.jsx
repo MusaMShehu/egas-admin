@@ -134,8 +134,8 @@ const Dashboard = () => {
       console.log('Fetching dashboard data...');
 
       const [statsResponse, activitiesResponse] = await Promise.all([
-        axios.get('http://localhost:5000/api/v1/admin/dashboard/stats', config),
-        axios.get('http://localhost:5000/api/v1/admin/dashboard/recent-activities', config)
+        axios.get('https://egas-server-1.onrender.com/api/v1/admin/dashboard/stats', config),
+        axios.get('https://egas-server-1.onrender.com/api/v1/admin/dashboard/recent-activities', config)
       ]);
 
       console.log('Stats response:', statsResponse.data);
