@@ -223,7 +223,7 @@
 
 /* Empty State */
 .adm-empty-state {
-  grid-column: 1 / -1;
+  grid-column: 1 -1;
   text-align: center;
   padding: 3rem;
   background: white;
@@ -247,7 +247,7 @@
   justify-content: center;
   align-items: center;
   padding: 3rem;
-  grid-column: 1 / -1;
+  grid-column: 1 -1;
 }
 
 .adm-spinner {
