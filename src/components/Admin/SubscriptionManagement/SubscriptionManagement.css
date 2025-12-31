@@ -487,3 +487,123 @@
   margin: 0 0 16px 0;
   color: #7f8c8d;
 }
+
+
+
+
+
+
+/* Add to SubscriptionManagement.css */
+.asm-pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.asm-pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.asm-pagination-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.asm-pagination-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.asm-page-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.asm-current-page {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.asm-total-pages {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.asm-page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asm-page-size-selector label {
+  font-size: 14px;
+  color: #495057;
+}
+
+.asm-limit-select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.asm-total-count {
+  padding: 8px 16px;
+  background: #e9ecef;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #495057;
+  font-weight: 500;
+}
+
+.asm-table-footer {
+  padding: 15px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* Update header stats */
+.asm-header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.asm-stat-item {
+  background: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.asm-stat-item strong {
+  color: #007bff;
+  font-size: 16px;
+}

@@ -1,15 +1,15 @@
 // components/AdminDeliveryManagement.jsx
-import React, { useState, useEffect } from 'react';
-import { 
-  FaUserCheck, 
-  FaCheckCircle, 
-  FaTimesCircle, 
-  FaSync, 
+import React, { useState, useEffect } from "react";
+import {
+  FaUserCheck,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaSync,
   FaPlus,
   FaEye,
-  FaSearch
-} from 'react-icons/fa';
-import './DeliveryManagement.css';
+  FaSearch,
+} from "react-icons/fa";
+import "./DeliveryManagement.css";
 
 const AdminDeliveryManagement = () => {
   const [deliveries, setDeliveries] = useState([]);
@@ -19,15 +19,20 @@ const AdminDeliveryManagement = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [total, setTotal] = useState(0);
   const [filters, setFilters] = useState({
-    status: '',
-    deliveryDate: '',
-    search: '',
+    status: "",
+    deliveryDate: "",
+    search: "",
+    remnantType: '',
   });
   const [assignDialogOpen, setAssignDialogOpen] = useState(false);
   const [selectedDelivery, setSelectedDelivery] = useState(null);
   const [agents, setAgents] = useState([]);
-  const [selectedAgent, setSelectedAgent] = useState('');
-  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [selectedAgent, setSelectedAgent] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   useEffect(() => {
     fetchDeliveries();
@@ -35,6 +40,7 @@ const AdminDeliveryManagement = () => {
     fetchAgents();
   }, [page, rowsPerPage, filters]);
 
+  // Update the fetchDeliveries function to include remnantType filter
   const fetchDeliveries = async () => {
     try {
       setLoading(true);
@@ -44,19 +50,22 @@ const AdminDeliveryManagement = () => {
         ...filters,
       }).toString();
 
-      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery?${queryParams}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+      const response = await fetch(
+        `https://egas-server-1.onrender.com/api/v1/admin/delivery?${queryParams}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
+      );
       const data = await response.json();
-      
+
       if (data.success) {
         setDeliveries(data.data);
         setTotal(data.total);
       }
     } catch (error) {
-      showSnackbar('Error fetching deliveries', 'error');
+      showSnackbar("Error fetching deliveries", "error");
     } finally {
       setLoading(false);
     }
@@ -64,101 +73,114 @@ const AdminDeliveryManagement = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/delivery/stats', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+      const response = await fetch(
+        "https://egas-server-1.onrender.com/api/v1/admin/delivery/stats",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
+      );
       const data = await response.json();
       if (data.success) {
         setStats(data.data);
       }
     } catch (error) {
-      console.error('Error fetching stats:', error);
+      console.error("Error fetching stats:", error);
     }
   };
 
+  const fetchAgents = async () => {
+    try {
+      const response = await fetch(
+        "https://egas-server-1.onrender.com/api/v1/admin/users?role=delivery",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log("Agents API response:", data);
 
-const fetchAgents = async () => {
-  try {
-    const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/users?role=delivery', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      if (data.success) {
+        const agentsArray = Array.isArray(data.data)
+          ? data.data
+          : data.data?.users || [];
+        setAgents(agentsArray);
+      } else {
+        setAgents([]);
       }
-    });
-    const data = await response.json();
-    console.log("Agents API response:", data);
-
-    if (data.success) {
-      const agentsArray = Array.isArray(data.data)
-        ? data.data
-        : data.data?.users || [];
-      setAgents(agentsArray);
-    } else {
+    } catch (error) {
+      console.error("Error fetching agents:", error);
       setAgents([]);
     }
-  } catch (error) {
-    console.error('Error fetching agents:', error);
-    setAgents([]);
-  }
-};
-
+  };
 
   const handleAssignAgent = (delivery) => {
     setSelectedDelivery(delivery);
-    setSelectedAgent('');
+    setSelectedAgent("");
     setAssignDialogOpen(true);
   };
 
   const confirmAssignAgent = async () => {
     if (!selectedAgent) {
-      showSnackbar('Please select an agent', 'error');
+      showSnackbar("Please select an agent", "error");
       return;
     }
 
     try {
-      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedDelivery._id}/assign`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ deliveryAgentId: selectedAgent })
-      });
+      const response = await fetch(
+        `https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedDelivery._id}/assign`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ deliveryAgentId: selectedAgent }),
+        }
+      );
 
       const data = await response.json();
-      
+
       if (data.success) {
-        showSnackbar('Delivery assigned successfully', 'success');
+        showSnackbar("Delivery assigned successfully", "success");
         setAssignDialogOpen(false);
         fetchDeliveries();
       } else {
-        showSnackbar(data.message, 'error');
+        showSnackbar(data.message, "error");
       }
     } catch (error) {
-      showSnackbar('Error assigning delivery', 'error');
+      showSnackbar("Error assigning delivery", "error");
     }
   };
 
   const generateSchedules = async () => {
     try {
-      const response = await fetch('https://egas-server-1.onrender.com/api/v1/admin/delivery/generate-schedules', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ daysAhead: 7 })
-      });
+      const response = await fetch(
+        "https://egas-server-1.onrender.com/api/v1/admin/delivery/generate-schedules",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ daysAhead: 7 }),
+        }
+      );
 
       const data = await response.json();
-      
+
       if (data.success) {
-        showSnackbar(`Generated ${data.generatedCount} delivery schedules`, 'success');
+        showSnackbar(
+          `Generated ${data.generatedCount} delivery schedules`,
+          "success"
+        );
         fetchDeliveries();
       }
     } catch (error) {
-      showSnackbar('Error generating schedules', 'error');
+      showSnackbar("Error generating schedules", "error");
     }
   };
 
@@ -171,24 +193,24 @@ const fetchAgents = async () => {
 
   const getStatusClass = (status) => {
     const statusMap = {
-      pending: 'adm-status-pending',
-      assigned: 'adm-status-assigned',
-      accepted: 'adm-status-accepted',
-      out_for_delivery: 'adm-status-out_for_delivery',
-      delivered: 'adm-status-delivered',
-      failed: 'adm-status-failed',
-      cancelled: 'adm-status-pending'
+      pending: "adm-status-pending",
+      assigned: "adm-status-assigned",
+      accepted: "adm-status-accepted",
+      out_for_delivery: "adm-status-out_for_delivery",
+      delivered: "adm-status-delivered",
+      failed: "adm-status-failed",
+      cancelled: "adm-status-pending",
     };
-    return `adm-status-chip ${statusMap[status] || 'adm-status-pending'}`;
+    return `adm-status-chip ${statusMap[status] || "adm-status-pending"}`;
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -202,7 +224,7 @@ const fetchAgents = async () => {
   };
 
   const handleFilterChange = (filter, value) => {
-    setFilters(prev => ({ ...prev, [filter]: value }));
+    setFilters((prev) => ({ ...prev, [filter]: value }));
     setPage(0);
   };
 
@@ -213,10 +235,7 @@ const fetchAgents = async () => {
       {/* Header and Stats */}
       <div className="adm-delivery-header">
         <h1 className="adm-delivery-title">Delivery Management</h1>
-        <button
-          className="adm-btn adm-btn-primary"
-          onClick={generateSchedules}
-        >
+        <button className="adm-btn adm-btn-primary" onClick={generateSchedules}>
           <FaPlus className="adm-icon" />
           Generate Schedules
         </button>
@@ -247,31 +266,33 @@ const fetchAgents = async () => {
         <div className="adm-filters-grid">
           <div className="adm-form-group">
             <label className="adm-form-label">Search</label>
-            <div style={{ position: 'relative' }}>
-              <FaSearch className="adm-icon" style={{
-                position: 'absolute',
-                left: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: '#7f8c8d'
-              }} />
+            <div style={{ position: "relative" }}>
+              <FaSearch
+                className="adm-icon"
+                style={{
+                  position: "absolute",
+                  left: "12px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: "#7f8c8d",
+                }}
+              />
               <input
                 type="text"
                 className="adm-form-input"
-                style={{ paddingLeft: '40px' }}
+                style={{ paddingLeft: "40px" }}
                 value={filters.search}
-                onChange={(e) => handleFilterChange('search', e.target.value)}
+                onChange={(e) => handleFilterChange("search", e.target.value)}
                 placeholder="Search by customer, address, or plan..."
               />
             </div>
           </div>
-          
           <div className="adm-form-group">
             <label className="adm-form-label">Status</label>
             <select
               className="adm-form-select"
               value={filters.status}
-              onChange={(e) => handleFilterChange('status', e.target.value)}
+              onChange={(e) => handleFilterChange("status", e.target.value)}
             >
               <option value="">All Status</option>
               <option value="pending">Pending</option>
@@ -282,17 +303,34 @@ const fetchAgents = async () => {
               <option value="failed">Failed</option>
             </select>
           </div>
-          
           <div className="adm-form-group">
             <label className="adm-form-label">Delivery Date</label>
             <input
               type="date"
               className="adm-form-input"
               value={filters.deliveryDate}
-              onChange={(e) => handleFilterChange('deliveryDate', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange("deliveryDate", e.target.value)
+              }
             />
           </div>
-          
+
+          {/* In the filters section, add a filter for remnant deliveries */}
+          <div className="adm-form-group">
+            <label className="adm-form-label">Remnant Type</label>
+            <select
+              className="adm-form-select"
+              value={filters.remnantType || ""}
+              onChange={(e) =>
+                handleFilterChange("remnantType", e.target.value)
+              }
+            >
+              <option value="">All Types</option>
+              <option value="partial">Partial Deliveries</option>
+              <option value="remnant">Remnant Deliveries</option>
+              <option value="regular">Regular Deliveries</option>
+            </select>
+          </div>
           <div className="adm-form-group">
             <button
               className="adm-btn adm-btn-outline"
@@ -321,6 +359,7 @@ const fetchAgents = async () => {
                 <th>Address</th>
                 <th>Agent</th>
                 <th>Status</th>
+                <th>Remnant</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -329,52 +368,83 @@ const fetchAgents = async () => {
                 <tr key={delivery._id}>
                   <td>
                     <div className="adm-customer-info">
-                      <div className="adm-customer-name">{delivery.customerName}</div>
-                      <div className="adm-customer-phone">{delivery.customerPhone}</div>
+                      <div className="adm-customer-name">
+                        {delivery.customerName}
+                      </div>
+                      <div className="adm-customer-phone">
+                        {delivery.customerPhone}
+                      </div>
                     </div>
                   </td>
                   <td>
                     <div className="adm-plan-info">
-                      <div className="adm-plan-name">{delivery.planDetails.planName}</div>
+                      <div className="adm-plan-name">
+                        {delivery.planDetails.planName}
+                      </div>
                       <div className="adm-plan-details">
-                        {delivery.planDetails.size} • {delivery.planDetails.frequency}
+                        {delivery.planDetails.size} •{" "}
+                        {delivery.planDetails.frequency}
+                        {delivery.isRemnantDelivery && (
+                          <span className="adm-remnant-badge">(Remnant)</span>
+                        )}
                       </div>
                     </div>
                   </td>
+                  <td>{formatDate(delivery.deliveryDate)}</td>
                   <td>
-                    {formatDate(delivery.deliveryDate)}
-                  </td>
-                  <td>
-                    <div className="adm-address">
-                      {delivery.address}
-                    </div>
+                    <div className="adm-address">{delivery.address}</div>
                   </td>
                   <td>
                     {delivery.deliveryAgent ? (
                       <div className="adm-agent-info">
-                        {delivery.deliveryAgent.firstName} {delivery.deliveryAgent.lastName}
+                        {delivery.deliveryAgent.firstName}{" "}
+                        {delivery.deliveryAgent.lastName}
                       </div>
                     ) : (
-                      <div className="adm-agent-unassigned">
-                        Not assigned
-                      </div>
+                      <div className="adm-agent-unassigned">Not assigned</div>
                     )}
                   </td>
                   <td>
                     <span className={getStatusClass(delivery.status)}>
-                      {delivery.status.replace(/_/g, ' ').toUpperCase()}
+                      {delivery.status.replace(/_/g, " ").toUpperCase()}
                     </span>
                   </td>
+                  {/* ADD THE REMNANT COLUMN HERE */}
                   <td>
-                    {!delivery.deliveryAgent && delivery.status === 'pending' && (
-                      <button
-                        className="adm-btn adm-btn-outline adm-btn-small"
-                        onClick={() => handleAssignAgent(delivery)}
-                      >
-                        <FaUserCheck className="adm-icon" />
-                        Assign
-                      </button>
-                    )}
+                    <div className="adm-remnant-info">
+                      {delivery.partialDelivery?.isPartial ? (
+                        <div className="adm-partial-delivery">
+                          <div className="adm-delivered-kg">
+                            Delivered: {delivery.deliveredKg}kg
+                          </div>
+                          <div className="adm-remaining-kg">
+                            Remaining: {delivery.remainingKg}kg
+                          </div>
+                        </div>
+                      ) : delivery.isRemnantDelivery ? (
+                        <div className="adm-remnant-delivery">
+                          <div className="adm-requested-kg">
+                            Requested: {delivery.requestedKg}kg
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="adm-no-remnant">
+                          <span className="adm-remnant-na">—</span>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    {!delivery.deliveryAgent &&
+                      delivery.status === "pending" && (
+                        <button
+                          className="adm-btn adm-btn-outline adm-btn-small"
+                          onClick={() => handleAssignAgent(delivery)}
+                        >
+                          <FaUserCheck className="adm-icon" />
+                          Assign
+                        </button>
+                      )}
                   </td>
                 </tr>
               ))}
@@ -396,7 +466,7 @@ const fetchAgents = async () => {
                 <option value={10}>10 per page</option>
                 <option value={25}>25 per page</option>
               </select>
-              
+
               <div className="adm-pagination-buttons">
                 <button
                   className="adm-page-btn"
@@ -405,22 +475,24 @@ const fetchAgents = async () => {
                 >
                   Previous
                 </button>
-                
+
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                   const pageNumber = i + Math.max(0, page - 2);
                   if (pageNumber >= totalPages) return null;
-                  
+
                   return (
                     <button
                       key={pageNumber}
-                      className={`adm-page-btn ${page === pageNumber ? 'active' : ''}`}
+                      className={`adm-page-btn ${
+                        page === pageNumber ? "active" : ""
+                      }`}
                       onClick={() => handleChangePage(pageNumber)}
                     >
                       {pageNumber + 1}
                     </button>
                   );
                 })}
-                
+
                 <button
                   className="adm-page-btn"
                   disabled={page >= totalPages - 1}
@@ -450,8 +522,9 @@ const fetchAgents = async () => {
               <h2 className="adm-dialog-title">Assign Delivery Agent</h2>
             </div>
             <div className="adm-dialog-content">
-              <p style={{ marginBottom: '1rem', color: '#7f8c8d' }}>
-                Assign delivery to {selectedDelivery?.customerName} for {selectedDelivery?.planDetails?.planName}
+              <p style={{ marginBottom: "1rem", color: "#7f8c8d" }}>
+                Assign delivery to {selectedDelivery?.customerName} for{" "}
+                {selectedDelivery?.planDetails?.planName}
               </p>
               <div className="adm-form-group">
                 <label className="adm-form-label">Select Agent</label>
@@ -470,13 +543,13 @@ const fetchAgents = async () => {
               </div>
             </div>
             <div className="adm-dialog-footer">
-              <button 
+              <button
                 className="adm-btn adm-btn-outline"
                 onClick={() => setAssignDialogOpen(false)}
               >
                 Cancel
               </button>
-              <button 
+              <button
                 className="adm-btn adm-btn-primary"
                 onClick={confirmAssignAgent}
               >
@@ -490,7 +563,7 @@ const fetchAgents = async () => {
       {/* Snackbar */}
       {snackbar.open && (
         <div className={`adm-snackbar ${snackbar.severity}`}>
-          {snackbar.severity === 'success' ? (
+          {snackbar.severity === "success" ? (
             <FaCheckCircle className="adm-icon" />
           ) : (
             <FaTimesCircle className="adm-icon" />

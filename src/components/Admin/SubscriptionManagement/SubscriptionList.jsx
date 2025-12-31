@@ -9,6 +9,7 @@ const SubscriptionList = ({
   error,
   selectedSubscriptions,
   sortConfig,
+  pagination,
   onSort,
   onViewSubscription,
   onEditSubscription,
@@ -324,12 +325,14 @@ const SubscriptionList = ({
         </table>
       </div>
       
+
       <div className="asm-table-footer">
         <div className="asm-pagination-info">
-          Showing {subscriptions.length} of {subscriptions.length} subscriptions
+          Showing {subscriptions.length} subscriptions 
+          {pagination?.total > 0 && ` (Total: ${pagination.total})`}
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

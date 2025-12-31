@@ -20,30 +20,23 @@ const ExportTools = ({ subscriptions, onExport }) => {
     reference: true
   });
 
-  const handleExport = async () => {
-    setExportLoading(true);
-    try {
-      // Call the export function passed as prop or use default
-      if (onExport) {
-        await onExport({
-          format: exportFormat,
-          filters: {
-            // Include any current filters here
-          },
-          fields: Object.keys(includeFields).filter(field => includeFields[field])
-        });
-      } else {
-        // Default export behavior
-        await handleDefaultExport();
-      }
-      setShowExportModal(false);
-    } catch (error) {
-      console.error('Export failed:', error);
-      alert('Export failed. Please try again.');
-    } finally {
-      setExportLoading(false);
+  // components/ExportTools.js - Update handleExport function
+const handleExport = async () => {
+  setExportLoading(true);
+  try {
+    if (onExport) {
+      await onExport();
+    } else {
+      await handleDefaultExport();
     }
-  };
+    setShowExportModal(false);
+  } catch (error) {
+    console.error('Export failed:', error);
+    alert('Export failed. Please try again.');
+  } finally {
+    setExportLoading(false);
+  }
+};
 
   const handleDefaultExport = async () => {
     // Convert subscriptions to CSV

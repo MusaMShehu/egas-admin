@@ -20,6 +20,8 @@ const DeliveryAgentPortal = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [deliveryDialogOpen, setDeliveryDialogOpen] = useState(false);
   const [failureDialogOpen, setFailureDialogOpen] = useState(false);
+  const [partialDialogOpen, setPartialDialogOpen] = useState(false);
+  const [orderForPartial, setOrderForPartial] = useState(null);
   const [deliveryNotes, setDeliveryNotes] = useState('');
   const [failureReason, setFailureReason] = useState('');
   const [failureNotes, setFailureNotes] = useState('');
@@ -56,58 +58,6 @@ const DeliveryAgentPortal = () => {
 
       if (response.ok && data.success) {
         setDeliveries(data.data);
-      } else {
-        showSnackbar(data.message || "Failed to fetch deliveries", "error");
-      }
-    } catch (error) {
-      console.error("Error fetching deliveries:", error);
-      showSnackbar("Error fetching deliveries", "error");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Alternative approach if you need more control over status filtering
-  const fetchAllDeliveries = async () => {
-    try {
-      setLoading(true);
-      
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `https://egas-server-1.onrender.com/api/v1/admin/delivery/agent/my-deliveries?status=all`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token?.replace(/^"|"$/g, "")}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        // Filter deliveries based on selected tab
-        let filteredDeliveries = data.data;
-        
-        if (selectedTab === 0) {
-          // Active deliveries: assigned, accepted, out_for_delivery
-          filteredDeliveries = data.data.filter(delivery => 
-            ['assigned', 'accepted', 'out_for_delivery'].includes(delivery.status)
-          );
-        } else if (selectedTab === 1) {
-          // Delivered
-          filteredDeliveries = data.data.filter(delivery => 
-            delivery.status === 'delivered'
-          );
-        } else if (selectedTab === 2) {
-          // Failed
-          filteredDeliveries = data.data.filter(delivery => 
-            delivery.status === 'failed'
-          );
-        }
-        
-        setDeliveries(filteredDeliveries);
       } else {
         showSnackbar(data.message || "Failed to fetch deliveries", "error");
       }
@@ -214,6 +164,36 @@ const DeliveryAgentPortal = () => {
     }
   };
 
+  const handleRecordPartialDelivery = async (deliveredKg, remainingKg, notes) => {
+    try {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderForPartial._id}/partial-delivery`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ 
+          deliveredKg, 
+          remainingKg, 
+          notes 
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showSnackbar('Partial delivery recorded successfully', 'success');
+        setPartialDialogOpen(false);
+        setOrderForPartial(null);
+        fetchDeliveries();
+      } else {
+        showSnackbar(data.message, 'error');
+      }
+    } catch (error) {
+      showSnackbar('Error recording partial delivery', 'error');
+    }
+  };
+
   const openDirections = (address) => {
     const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
     window.open(mapsUrl, '_blank');
@@ -254,6 +234,159 @@ const DeliveryAgentPortal = () => {
 
   const handleTabChange = (newValue) => {
     setSelectedTab(newValue);
+  };
+
+  // Partial Delivery Dialog Component
+  const PartialDeliveryDialog = ({ 
+    open, 
+    onClose, 
+    order, 
+    onConfirm 
+  }) => {
+    const [deliveredKg, setDeliveredKg] = useState('');
+    const [remainingKg, setRemainingKg] = useState('');
+    const [notes, setNotes] = useState('');
+    const [error, setError] = useState('');
+    
+    const expectedKg = order?.planDetails?.size ? 
+      parseFloat(order.planDetails.size.split('kg')[0]) : 0;
+    
+    React.useEffect(() => {
+      if (open && order) {
+        setDeliveredKg('');
+        setRemainingKg('');
+        setNotes('');
+        setError('');
+      }
+    }, [open, order]);
+    
+    const handleSubmit = () => {
+      const delivered = parseFloat(deliveredKg);
+      const remaining = parseFloat(remainingKg);
+      
+      if (!deliveredKg || !remainingKg) {
+        setError('Both fields are required');
+        return;
+      }
+      
+      if (isNaN(delivered) || isNaN(remaining)) {
+        setError('Please enter valid numbers');
+        return;
+      }
+      
+      if (delivered + remaining !== expectedKg) {
+        setError(`Total must equal ${expectedKg}kg`);
+        return;
+      }
+      
+      onConfirm(deliveredKg, remainingKg, notes);
+    };
+    
+    if (!open) return null;
+    
+    return (
+      <div className="adm-dialog-overlay">
+        <div className="adm-dialog">
+          <div className="adm-dialog-header">
+            <h2 className="adm-dialog-title">Record Partial Delivery</h2>
+          </div>
+          <div className="adm-dialog-content">
+            <p style={{ marginBottom: '1rem', color: '#7f8c8d' }}>
+              Customer: <strong>{order.customerName}</strong><br />
+              Expected: <strong>{expectedKg}kg</strong><br />
+              Plan: <strong>{order.planDetails.planName}</strong>
+            </p>
+            
+            {error && (
+              <div className="adm-alert adm-alert-error" style={{ marginBottom: '1rem' }}>
+                {error}
+              </div>
+            )}
+            
+            <div className="adm-form-row">
+              <div className="adm-form-group">
+                <label className="adm-form-label">Delivered (kg)</label>
+                <input
+                  type="number"
+                  className="adm-form-input"
+                  value={deliveredKg}
+                  onChange={(e) => {
+                    setDeliveredKg(e.target.value);
+                    if (expectedKg && e.target.value) {
+                      const remaining = expectedKg - parseFloat(e.target.value);
+                      setRemainingKg(remaining.toString());
+                    }
+                  }}
+                  min="0"
+                  max={expectedKg}
+                  step="0.5"
+                  placeholder="0"
+                />
+              </div>
+              
+              <div className="adm-form-group">
+                <label className="adm-form-label">Remaining (kg)</label>
+                <input
+                  type="number"
+                  className="adm-form-input"
+                  value={remainingKg}
+                  onChange={(e) => {
+                    setRemainingKg(e.target.value);
+                    if (expectedKg && e.target.value) {
+                      const delivered = expectedKg - parseFloat(e.target.value);
+                      setDeliveredKg(delivered.toString());
+                    }
+                  }}
+                  min="0"
+                  max={expectedKg}
+                  step="0.5"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+            
+            <div className="adm-form-group">
+              <label className="adm-form-label">Notes (Optional)</label>
+              <textarea
+                className="adm-form-textarea"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Add notes about why partial delivery was needed..."
+                rows={3}
+              />
+            </div>
+            
+            <div className="adm-info-box" style={{ 
+              backgroundColor: '#f8f9fa', 
+              padding: '1rem',
+              borderRadius: '4px',
+              marginTop: '1rem'
+            }}>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: '#666' }}>
+                <strong>Note:</strong> The remaining {remainingKg || '...'}kg will be added to customer's 
+                accumulated remnant balance. Customer needs to confirm this entry.
+              </p>
+            </div>
+          </div>
+          <div className="adm-dialog-footer">
+            <button 
+              className="adm-btn adm-btn-outline"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button 
+              className="adm-btn adm-btn-warning"
+              onClick={handleSubmit}
+              disabled={!deliveredKg || !remainingKg}
+            >
+              <FaExclamationTriangle className="adm-icon" />
+              Record Partial Delivery
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   // Filter deliveries for display (as backup)
@@ -391,6 +524,19 @@ const DeliveryAgentPortal = () => {
                         <FaCheckCircle className="adm-icon" />
                         Delivered
                       </button>
+                      
+                      {/* Add Partial Delivery Button */}
+                      <button
+                        className="adm-btn adm-btn-warning adm-btn-small"
+                        onClick={() => {
+                          setOrderForPartial(order);
+                          setPartialDialogOpen(true);
+                        }}
+                      >
+                        <FaExclamationTriangle className="adm-icon" />
+                        Partial
+                      </button>
+                      
                       <button
                         className="adm-btn adm-btn-error adm-btn-small"
                         onClick={() => {
@@ -555,6 +701,17 @@ const DeliveryAgentPortal = () => {
           </div>
         </div>
       )}
+
+      {/* Partial Delivery Dialog */}
+      <PartialDeliveryDialog
+        open={partialDialogOpen}
+        onClose={() => {
+          setPartialDialogOpen(false);
+          setOrderForPartial(null);
+        }}
+        order={orderForPartial}
+        onConfirm={handleRecordPartialDelivery}
+      />
 
       {/* Snackbar */}
       {snackbar.open && (

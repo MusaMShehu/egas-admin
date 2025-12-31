@@ -47,9 +47,6 @@ function App() {
         closeOnClick />
         <Routes>
 
-         
-
-
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import axios from "axios";
 import { 
   FaDownload, 
   FaExclamationCircle, 
@@ -33,6 +34,7 @@ const getAuthHeaders = () => ({
 });
 
 const SUB_URL = 'https://egas-server-1.onrender.com/api/v1/admin/subscription-plans';
+const API_BASE_URL = 'https://egas-server-1.onrender.com';
 
 // Inline API functions for Products
 const productAPI = {
@@ -79,7 +81,7 @@ const productAPI = {
     return await response.json();
   },
 
-  uploadProductPhoto: async (productId, file) => {
+ uploadProductPhoto: async (productId, file) => {
   try {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
 
@@ -88,35 +90,30 @@ const productAPI = {
     }
 
     const formData = new FormData();
-    formData.append("photo", file); // MUST match backend field name
+    formData.append("photo", file); // MUST match backend
 
-    const response = await fetch(
+    const response = await axios.put(
       `https://egas-server-1.onrender.com/api/v1/admin/products/${productId}/photo`,
+      formData,
       {
-        method: "PUT",
         headers: {
-          Authorization: `Bearer ${token}`, // ✅ Required by protect middleware
+          Authorization: `Bearer ${token}`,
+          // ❗ DO NOT SET Content-Type manually
         },
-        body: formData,
       }
     );
 
-    // Direct error text for clarity
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Failed to upload photo: ${errText}`);
-    }
-
-    return await response.json();
-
+    return response.data;
   } catch (error) {
     console.error("Upload Error:", error);
-    throw error;
+    throw new Error(
+      `Failed to upload photo: ${
+        error.response?.data?.error || error.message
+      }`
+    );
   }
 },
-
-};
-
+}
 
 // Inline API functions for Subscription Plans
 const subscriptionPlanAPI = {
@@ -760,7 +757,7 @@ const ProductsManagement = ({
                       <div className="apm-product-name-cell">
                         {product.image && product.image !== 'default-product.jpg' ? (
                           <img 
-                            src={`/uploads/products/${product.image}`} 
+                            src={`${API_BASE_URL}/uploads/products/${product.image}`} 
                             alt={product.name}
                             className="apm-product-image"
                           />
@@ -1455,27 +1452,28 @@ const AdminProductManagement = () => {
   };
 
   const handleUploadPhoto = async (productId, file) => {
-    if (!file) {
-      setError('Please select an image file first');
-      return;
-    }
+  if (!file) {
+    setError("Please select an image file first");
+    return;
+  }
 
     try {
       setLoading(true);
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("photo", file); 
       
-      await productAPI.uploadProductPhoto(productId, formData);
-      setSuccessMessage('Product photo uploaded successfully!');
-      fetchProducts();
-      setTimeout(() => setSuccessMessage(''), 3000);
-    } catch (err) {
-      console.error('Failed to upload photo:', err);
-      setError('Failed to upload product photo. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+     await productAPI.uploadProductPhoto(productId, file);  // 👈 pass only file
+
+    setSuccessMessage("Product photo uploaded successfully!");
+    fetchProducts();
+    setTimeout(() => setSuccessMessage(""), 3000);
+  } catch (err) {
+    console.error("Failed to upload photo:", err);
+    setError("Failed to upload product photo. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Role-based permission system
   const hasPermission = (action) => {

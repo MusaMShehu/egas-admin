@@ -3,7 +3,7 @@ import axios from "axios";
 // =============================
 // ✅ Configuration
 // =============================
-const API_BASE_URL = "https://egas-server-1.onrender.com"; 
+const API_BASE_URL = "http://localhost:5000"; 
 
 // ✅ Safely get token from localStorage
 const getToken = () => {
@@ -63,12 +63,48 @@ api.interceptors.response.use(
 // =============================
 // ✅ Admin Subscription Service
 // =============================
+// const adminSubscriptionService = {
+//   // Get all subscriptions
+//   async getAdminSubscriptions(params = {}) {
+//     const response = await api.get("/api/v1/admin/subscriptions", { params });
+//     return response.data;
+//   },
+
+// services/adminSubscriptionService.js
 const adminSubscriptionService = {
-  // Get all subscriptions
+  // Get all subscriptions - FIX PARAMS HANDLING
   async getAdminSubscriptions(params = {}) {
-    const response = await api.get("/api/v1/admin/subscriptions", { params });
+    // Ensure we're passing all parameters correctly
+    const queryParams = new URLSearchParams();
+    
+    // Add pagination params
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+    
+    // Add filter params
+    if (params.search) queryParams.append('search', params.search);
+    if (params.status && params.status !== 'all') queryParams.append('status', params.status);
+    if (params.planType && params.planType !== 'all') queryParams.append('planType', params.planType);
+    if (params.frequency && params.frequency !== 'all') queryParams.append('frequency', params.frequency);
+    if (params.size && params.size !== 'all') queryParams.append('size', params.size);
+    
+    // Add sort params
+    if (params.sort) queryParams.append('sort', params.sort);
+    if (params.select) queryParams.append('select', params.select);
+    
+    // Add date range params
+    if (params.startDate) queryParams.append('startDate', params.startDate);
+    if (params.endDate) queryParams.append('endDate', params.endDate);
+    
+    const queryString = queryParams.toString();
+    const url = `/api/v1/admin/subscriptions${queryString ? `?${queryString}` : ''}`;
+    
+    console.log('Fetching subscriptions from:', url); // Debug log
+    
+    const response = await api.get(url);
     return response.data;
   },
+  
 
   // Get single subscription
   async getAdminSubscription(id) {

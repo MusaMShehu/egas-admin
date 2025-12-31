@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
 import { useAuth } from "../../contexts/AuthContext";
-import "../../styles/AccountSection.css";
+import "./AccountSection.css";
 
 const AccountSection = ({ onLoginClick }) => {
   const { user, logout } = useAuth();

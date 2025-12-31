@@ -5,22 +5,58 @@ import { FaPlus, FaMinus, FaTimes, FaFilter } from 'react-icons/fa';
 const SubscriptionFilters = ({ filters, onFiltersChange, onClearFilters }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
 
+  // const handleFilterChange = (key, value) => {
+  //   onFiltersChange({
+  //     ...filters,
+  //     [key]: value
+  //   });
+  // };
+
+  // const handleDateRangeChange = (type, value) => {
+  //   onFiltersChange({
+  //     ...filters,
+  //     dateRange: {
+  //       ...filters.dateRange,
+  //       [type]: value
+  //     }
+  //   });
+  // };
+
+
   const handleFilterChange = (key, value) => {
-    onFiltersChange({
+    const newFilters = {
       ...filters,
       [key]: value
-    });
+    };
+    
+    // If status/planType/frequency/size is set to 'all', remove the param
+    if (['status', 'planType', 'frequency', 'size'].includes(key) && value === 'all') {
+      delete newFilters[key];
+    }
+    
+    onFiltersChange(newFilters);
   };
 
-  const handleDateRangeChange = (type, value) => {
-    onFiltersChange({
-      ...filters,
-      dateRange: {
-        ...filters.dateRange,
-        [type]: value
-      }
-    });
+  // components/SubscriptionFilters.js - Update the handleDateRangeChange function
+const handleDateRangeChange = (type, value) => {
+  const newFilters = {
+    ...filters,
+    dateRange: {
+      ...filters.dateRange,
+      [type]: value
+    }
   };
+  
+  // Also set the flat params for API
+  if (type === 'start') {
+    newFilters.startDate = value || null;
+  }
+  if (type === 'end') {
+    newFilters.endDate = value || null;
+  }
+  
+  onFiltersChange(newFilters);
+};
 
   const hasActiveFilters = () => {
     return filters.frequency !== 'all' || 

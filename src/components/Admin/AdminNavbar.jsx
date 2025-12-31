@@ -2,6 +2,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Admin.css"; 
+import AccountSection from "../headers/AccountSection";
 
 const Navbar = () => {
   const location = useLocation();
@@ -36,7 +37,9 @@ const Navbar = () => {
             <i className={`${item.icon} nav-icon`}></i> 
             <span className="nav-text">{item.name}</span>
           </Link>
+          
         ))}
+        {/* <AccountSection/> */}
       </div>
     </nav>
   );

@@ -457,6 +457,69 @@
   margin-bottom: 0.5rem;
 }
 
+
+
+
+/* Add to DeliveryManagement.css */
+
+/* Remnant badge */
+.adm-remnant-badge {
+  background-color: #f39c12;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+/* Remnant info styling */
+.adm-remnant-info {
+  font-size: 0.85rem;
+}
+
+.adm-partial-delivery {
+  background-color: #fff8e1;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border-left: 3px solid #f39c12;
+}
+
+.adm-remnant-delivery {
+  background-color: #e8f5e8;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border-left: 3px solid #27ae60;
+}
+
+.adm-delivered-kg,
+.adm-remaining-kg,
+.adm-requested-kg {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.adm-delivered-kg {
+  color: #27ae60;
+}
+
+.adm-remaining-kg {
+  color: #f39c12;
+  font-weight: 500;
+}
+
+.adm-requested-kg {
+  color: #3498db;
+  font-weight: 500;
+}
+
+.adm-remnant-na {
+  color: #95a5a6;
+  font-style: italic;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .adm-delivery-management {

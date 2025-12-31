@@ -1,4 +1,42 @@
 // hooks/useAdminSubscription.js
+// import { useState, useCallback } from 'react';
+// import adminSubscriptionService from '../services/adminSubscriptionService';
+
+// export const useAdminSubscription = () => {
+//   const [subscriptions, setSubscriptions] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+//   const [analytics, setAnalytics] = useState(null);
+//   const [statistics, setStatistics] = useState(null);
+//   const [pagination, setPagination] = useState({
+//     page: 1,
+//     limit: 25,
+//     total: 0,
+//     totalPages: 0,
+//     hasNext: false,
+//     hasPrev: false
+//   });
+
+//   const fetchSubscriptions = useCallback(async (params = {}) => {
+//     try {
+//       setLoading(true);
+//       setError(null);
+//       const response = await adminSubscriptionService.getAdminSubscriptions(params);
+//       setSubscriptions(response.data || response || []);
+//       return { success: true, data: response.data || response };
+//     } catch (err) {
+//       const errorMessage = err.response?.data?.message || err.message || 'Failed to fetch subscriptions';
+//       setError(errorMessage);
+//       return { 
+//         success: false, 
+//         error: errorMessage 
+//       };
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
+
+// hooks/useAdminSubscription.js
 import { useState, useCallback } from 'react';
 import adminSubscriptionService from '../services/adminSubscriptionService';
 
@@ -8,14 +46,55 @@ export const useAdminSubscription = () => {
   const [error, setError] = useState(null);
   const [analytics, setAnalytics] = useState(null);
   const [statistics, setStatistics] = useState(null);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 25,
+    total: 0,
+    totalPages: 1,
+    hasNext: false,
+    hasPrev: false
+  });
 
   const fetchSubscriptions = useCallback(async (params = {}) => {
     try {
       setLoading(true);
       setError(null);
       const response = await adminSubscriptionService.getAdminSubscriptions(params);
-      setSubscriptions(response.data || response || []);
-      return { success: true, data: response.data || response };
+      
+      // Handle response structure
+      if (response.success) {
+        const data = response.data || [];
+        const page = parseInt(params.page) || 1;
+        const limit = parseInt(params.limit) || 25;
+        const total = response.total || 0;
+        const totalPages = Math.ceil(total / limit);
+        
+        setSubscriptions(data);
+        setPagination({
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNext: page < totalPages,
+          hasPrev: page > 1
+        });
+        
+        return { 
+          success: true, 
+          data,
+          pagination: {
+            page,
+            limit,
+            total,
+            totalPages
+          },
+          total
+        };
+      } else {
+        // If response is just an array
+        setSubscriptions(response || []);
+        return { success: true, data: response || [] };
+      }
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message || 'Failed to fetch subscriptions';
       setError(errorMessage);
@@ -27,6 +106,8 @@ export const useAdminSubscription = () => {
       setLoading(false);
     }
   }, []);
+
+
 
   const createSubscription = useCallback(async (subscriptionData) => {
     try {
@@ -216,6 +297,36 @@ export const useAdminSubscription = () => {
     }
   }, []);
 
+
+  // hooks/useAdminSubscription.js - Add this function
+const fetchAnalyticsSubscriptions = useCallback(async (params = {}) => {
+  try {
+    setLoading(true);
+    setError(null);
+    // Fetch all subscriptions without pagination for analytics
+    const analyticsParams = { ...params, limit: 1000, page: 1 }; // Large limit to get all data
+    const response = await adminSubscriptionService.getAdminSubscriptions(analyticsParams);
+    
+    if (response.success) {
+      return { 
+        success: true, 
+        data: response.data || [],
+        total: response.total || 0
+      };
+    } else {
+      return { success: true, data: response || [] };
+    }
+  } catch (err) {
+    const errorMessage = err.response?.data?.message || err.message || 'Failed to fetch analytics data';
+    return { 
+      success: false, 
+      error: errorMessage 
+    };
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
   const exportSubscriptions = useCallback(async (params = {}) => {
     try {
       setLoading(true);
@@ -249,6 +360,7 @@ export const useAdminSubscription = () => {
     error,
     analytics,
     statistics,
+    pagination,
     fetchSubscriptions,
     createSubscription,
     updateSubscription,
@@ -260,6 +372,7 @@ export const useAdminSubscription = () => {
     bulkDeleteSubscriptions,
     fetchAnalytics,
     fetchStatistics,
+    fetchAnalyticsSubscriptions,
     exportSubscriptions
   };
 };
