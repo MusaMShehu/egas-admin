@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // // components/DeliveryAgentPortal.jsx
 // import React, { useState, useEffect } from "react";
 // import {
@@ -1592,10 +1593,20 @@ import {
   FaTimesCircle,
   FaDirections,
   FaPhone,
+=======
+// components/DeliveryAgentPortal.jsx
+import React, { useState, useEffect } from 'react';
+import { 
+  FaCheckCircle, 
+  FaTimesCircle, 
+  FaDirections, 
+  FaPhone, 
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   FaMapMarkerAlt,
   FaSync,
   FaShippingFast,
   FaHistory,
+<<<<<<< HEAD
   FaExclamationTriangle,
   FaPauseCircle,
   FaPlayCircle,
@@ -1605,6 +1616,11 @@ import {
 } from "react-icons/fa";
 import "./DeliveryAgentPortal.css";
 import "./SharedPartialDeliveryStyle.css";
+=======
+  FaExclamationTriangle
+} from 'react-icons/fa';
+import './DeliveryAgentPortal.css';
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
 const DeliveryAgentPortal = () => {
   const [deliveries, setDeliveries] = useState([]);
@@ -1615,6 +1631,7 @@ const DeliveryAgentPortal = () => {
   const [failureDialogOpen, setFailureDialogOpen] = useState(false);
   const [partialDialogOpen, setPartialDialogOpen] = useState(false);
   const [orderForPartial, setOrderForPartial] = useState(null);
+<<<<<<< HEAD
   const [deliveryNotes, setDeliveryNotes] = useState("");
   const [failureReason, setFailureReason] = useState("");
   const [failureNotes, setFailureNotes] = useState("");
@@ -1623,6 +1640,12 @@ const DeliveryAgentPortal = () => {
     message: "",
     severity: "success",
   });
+=======
+  const [deliveryNotes, setDeliveryNotes] = useState('');
+  const [failureReason, setFailureReason] = useState('');
+  const [failureNotes, setFailureNotes] = useState('');
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
   useEffect(() => {
     fetchDeliveries();
@@ -1634,8 +1657,12 @@ const DeliveryAgentPortal = () => {
 
       // Determine delivery status based on selected tab
       let status = "all";
+<<<<<<< HEAD
       if (selectedTab === 0)
         status = "assigned,accepted,out_for_delivery,paused"; // Includes paused deliveries
+=======
+      if (selectedTab === 0) status = "assigned,accepted,out_for_delivery"; // Includes assigned, accepted, out_for_delivery
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       else if (selectedTab === 1) status = "delivered";
       else if (selectedTab === 2) status = "failed";
 
@@ -1649,12 +1676,17 @@ const DeliveryAgentPortal = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token?.replace(/^"|"$/g, "")}`,
           },
+<<<<<<< HEAD
         },
+=======
+        }
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       );
 
       const data = await response.json();
 
       if (response.ok && data.success) {
+<<<<<<< HEAD
         // Enhance deliveries with subscription info
         const enhancedDeliveries = await Promise.all(
           data.data.map(async (delivery) => {
@@ -1684,6 +1716,9 @@ const DeliveryAgentPortal = () => {
           }),
         );
         setDeliveries(enhancedDeliveries);
+=======
+        setDeliveries(data.data);
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       } else {
         showSnackbar(data.message || "Failed to fetch deliveries", "error");
       }
@@ -1695,6 +1730,7 @@ const DeliveryAgentPortal = () => {
     }
   };
 
+<<<<<<< HEAD
   const checkDeliverySyncStatus = (delivery) => {
     if (!delivery.subscriptionDetails) return { shouldBePaused: false };
 
@@ -1730,11 +1766,30 @@ const DeliveryAgentPortal = () => {
       }
     } catch (error) {
       showSnackbar("Error accepting delivery", "error");
+=======
+  const handleAcceptDelivery = async (orderId) => {
+    try {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderId}/accept`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        showSnackbar('Delivery accepted successfully', 'success');
+        fetchDeliveries();
+      }
+    } catch (error) {
+      showSnackbar('Error accepting delivery', 'error');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     }
   };
 
   const handleMarkOutForDelivery = async (orderId) => {
     try {
+<<<<<<< HEAD
       const response = await fetch(
         `https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderId}/out-for-delivery`,
         {
@@ -1752,11 +1807,28 @@ const DeliveryAgentPortal = () => {
       }
     } catch (error) {
       showSnackbar("Error updating delivery status", "error");
+=======
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderId}/out-for-delivery`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        showSnackbar('Delivery marked as out for delivery', 'success');
+        fetchDeliveries();
+      }
+    } catch (error) {
+      showSnackbar('Error updating delivery status', 'error');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     }
   };
 
   const handleMarkDelivered = async () => {
     try {
+<<<<<<< HEAD
       const response = await fetch(
         `https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedOrder._id}/delivered`,
         {
@@ -1774,21 +1846,46 @@ const DeliveryAgentPortal = () => {
         showSnackbar("Delivery marked as successful", "success");
         setDeliveryDialogOpen(false);
         setDeliveryNotes("");
+=======
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedOrder._id}/delivered`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ notes: deliveryNotes })
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        showSnackbar('Delivery marked as successful', 'success');
+        setDeliveryDialogOpen(false);
+        setDeliveryNotes('');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         setSelectedOrder(null);
         fetchDeliveries();
       }
     } catch (error) {
+<<<<<<< HEAD
       showSnackbar("Error marking delivery", "error");
+=======
+      showSnackbar('Error marking delivery', 'error');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     }
   };
 
   const handleMarkFailed = async () => {
     if (!failureReason.trim()) {
+<<<<<<< HEAD
       showSnackbar("Please provide a reason for failure", "error");
+=======
+      showSnackbar('Please provide a reason for failure', 'error');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       return;
     }
 
     try {
+<<<<<<< HEAD
       const response = await fetch(
         `https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedOrder._id}/failed`,
         {
@@ -1810,10 +1907,31 @@ const DeliveryAgentPortal = () => {
         setFailureDialogOpen(false);
         setFailureReason("");
         setFailureNotes("");
+=======
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${selectedOrder._id}/failed`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ 
+          reason: failureReason,
+          notes: failureNotes 
+        })
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        showSnackbar('Delivery marked as failed and rescheduled', 'success');
+        setFailureDialogOpen(false);
+        setFailureReason('');
+        setFailureNotes('');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         setSelectedOrder(null);
         fetchDeliveries();
       }
     } catch (error) {
+<<<<<<< HEAD
       showSnackbar("Error marking delivery as failed", "error");
     }
   };
@@ -1844,10 +1962,36 @@ const DeliveryAgentPortal = () => {
 
       if (data.success) {
         showSnackbar("Partial delivery recorded successfully", "success");
+=======
+      showSnackbar('Error marking delivery as failed', 'error');
+    }
+  };
+
+  const handleRecordPartialDelivery = async (deliveredKg, remainingKg, notes) => {
+    try {
+      const response = await fetch(`https://egas-server-1.onrender.com/api/v1/admin/delivery/${orderForPartial._id}/partial-delivery`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ 
+          deliveredKg, 
+          remainingKg, 
+          notes 
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showSnackbar('Partial delivery recorded successfully', 'success');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         setPartialDialogOpen(false);
         setOrderForPartial(null);
         fetchDeliveries();
       } else {
+<<<<<<< HEAD
         showSnackbar(data.message, "error");
       }
     } catch (error) {
@@ -1881,14 +2025,25 @@ const DeliveryAgentPortal = () => {
       }
     } catch (error) {
       showSnackbar("Error syncing delivery", "error");
+=======
+        showSnackbar(data.message, 'error');
+      }
+    } catch (error) {
+      showSnackbar('Error recording partial delivery', 'error');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     }
   };
 
   const openDirections = (address) => {
+<<<<<<< HEAD
     const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
       address,
     )}`;
     window.open(mapsUrl, "_blank");
+=======
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+    window.open(mapsUrl, '_blank');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   };
 
   const callCustomer = (phone) => {
@@ -1904,6 +2059,7 @@ const DeliveryAgentPortal = () => {
 
   const getStatusClass = (status) => {
     const statusMap = {
+<<<<<<< HEAD
       assigned: "adm-status-assigned",
       accepted: "adm-status-accepted",
       out_for_delivery: "adm-status-out_for_delivery",
@@ -1931,6 +2087,25 @@ const DeliveryAgentPortal = () => {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+=======
+      assigned: 'adm-status-assigned',
+      accepted: 'adm-status-accepted',
+      out_for_delivery: 'adm-status-out_for_delivery',
+      delivered: 'adm-status-delivered',
+      failed: 'adm-status-failed'
+    };
+    return `adm-status-chip ${statusMap[status] || 'adm-status-assigned'}`;
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     });
   };
 
@@ -1938,6 +2113,7 @@ const DeliveryAgentPortal = () => {
     setSelectedTab(newValue);
   };
 
+<<<<<<< HEAD
   // Filter deliveries for display
   const getFilteredDeliveries = () => {
     if (selectedTab === 0) {
@@ -1950,6 +2126,171 @@ const DeliveryAgentPortal = () => {
       return deliveries.filter((delivery) => delivery.status === "delivered");
     } else if (selectedTab === 2) {
       return deliveries.filter((delivery) => delivery.status === "failed");
+=======
+  // Partial Delivery Dialog Component
+  const PartialDeliveryDialog = ({ 
+    open, 
+    onClose, 
+    order, 
+    onConfirm 
+  }) => {
+    const [deliveredKg, setDeliveredKg] = useState('');
+    const [remainingKg, setRemainingKg] = useState('');
+    const [notes, setNotes] = useState('');
+    const [error, setError] = useState('');
+    
+    const expectedKg = order?.planDetails?.size ? 
+      parseFloat(order.planDetails.size.split('kg')[0]) : 0;
+    
+    React.useEffect(() => {
+      if (open && order) {
+        setDeliveredKg('');
+        setRemainingKg('');
+        setNotes('');
+        setError('');
+      }
+    }, [open, order]);
+    
+    const handleSubmit = () => {
+      const delivered = parseFloat(deliveredKg);
+      const remaining = parseFloat(remainingKg);
+      
+      if (!deliveredKg || !remainingKg) {
+        setError('Both fields are required');
+        return;
+      }
+      
+      if (isNaN(delivered) || isNaN(remaining)) {
+        setError('Please enter valid numbers');
+        return;
+      }
+      
+      if (delivered + remaining !== expectedKg) {
+        setError(`Total must equal ${expectedKg}kg`);
+        return;
+      }
+      
+      onConfirm(deliveredKg, remainingKg, notes);
+    };
+    
+    if (!open) return null;
+    
+    return (
+      <div className="adm-dialog-overlay">
+        <div className="adm-dialog">
+          <div className="adm-dialog-header">
+            <h2 className="adm-dialog-title">Record Partial Delivery</h2>
+          </div>
+          <div className="adm-dialog-content">
+            <p style={{ marginBottom: '1rem', color: '#7f8c8d' }}>
+              Customer: <strong>{order.customerName}</strong><br />
+              Expected: <strong>{expectedKg}kg</strong><br />
+              Plan: <strong>{order.planDetails.planName}</strong>
+            </p>
+            
+            {error && (
+              <div className="adm-alert adm-alert-error" style={{ marginBottom: '1rem' }}>
+                {error}
+              </div>
+            )}
+            
+            <div className="adm-form-row">
+              <div className="adm-form-group">
+                <label className="adm-form-label">Delivered (kg)</label>
+                <input
+                  type="number"
+                  className="adm-form-input"
+                  value={deliveredKg}
+                  onChange={(e) => {
+                    setDeliveredKg(e.target.value);
+                    if (expectedKg && e.target.value) {
+                      const remaining = expectedKg - parseFloat(e.target.value);
+                      setRemainingKg(remaining.toString());
+                    }
+                  }}
+                  min="0"
+                  max={expectedKg}
+                  step="0.5"
+                  placeholder="0"
+                />
+              </div>
+              
+              <div className="adm-form-group">
+                <label className="adm-form-label">Remaining (kg)</label>
+                <input
+                  type="number"
+                  className="adm-form-input"
+                  value={remainingKg}
+                  onChange={(e) => {
+                    setRemainingKg(e.target.value);
+                    if (expectedKg && e.target.value) {
+                      const delivered = expectedKg - parseFloat(e.target.value);
+                      setDeliveredKg(delivered.toString());
+                    }
+                  }}
+                  min="0"
+                  max={expectedKg}
+                  step="0.5"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+            
+            <div className="adm-form-group">
+              <label className="adm-form-label">Notes (Optional)</label>
+              <textarea
+                className="adm-form-textarea"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Add notes about why partial delivery was needed..."
+                rows={3}
+              />
+            </div>
+            
+            <div className="adm-info-box" style={{ 
+              backgroundColor: '#f8f9fa', 
+              padding: '1rem',
+              borderRadius: '4px',
+              marginTop: '1rem'
+            }}>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: '#666' }}>
+                <strong>Note:</strong> The remaining {remainingKg || '...'}kg will be added to customer's 
+                accumulated remnant balance. Customer needs to confirm this entry.
+              </p>
+            </div>
+          </div>
+          <div className="adm-dialog-footer">
+            <button 
+              className="adm-btn adm-btn-outline"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button 
+              className="adm-btn adm-btn-warning"
+              onClick={handleSubmit}
+              disabled={!deliveredKg || !remainingKg}
+            >
+              <FaExclamationTriangle className="adm-icon" />
+              Record Partial Delivery
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Filter deliveries for display (as backup)
+  const getFilteredDeliveries = () => {
+    if (selectedTab === 0) {
+      return deliveries.filter(delivery => 
+        ['assigned', 'accepted', 'out_for_delivery'].includes(delivery.status)
+      );
+    } else if (selectedTab === 1) {
+      return deliveries.filter(delivery => delivery.status === 'delivered');
+    } else if (selectedTab === 2) {
+      return deliveries.filter(delivery => delivery.status === 'failed');
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     }
     return deliveries;
   };
@@ -1970,15 +2311,23 @@ const DeliveryAgentPortal = () => {
     <div className="adm-agent-portal">
       <div className="adm-agent-header">
         <h1 className="adm-agent-title">My Deliveries</h1>
+<<<<<<< HEAD
 
         <div className="adm-tabs">
           <button
             className={`adm-tab ${selectedTab === 0 ? "active" : ""}`}
+=======
+        
+        <div className="adm-tabs">
+          <button 
+            className={`adm-tab ${selectedTab === 0 ? 'active' : ''}`}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             onClick={() => handleTabChange(0)}
           >
             <FaShippingFast className="adm-icon" />
             Active Deliveries
             <span className="adm-tab-badge">
+<<<<<<< HEAD
               {
                 deliveries.filter((d) =>
                   [
@@ -2009,12 +2358,36 @@ const DeliveryAgentPortal = () => {
             Failed
             <span className="adm-tab-badge">
               {deliveries.filter((d) => d.status === "failed").length}
+=======
+              {deliveries.filter(d => ['assigned', 'accepted', 'out_for_delivery'].includes(d.status)).length}
+            </span>
+          </button>
+          <button 
+            className={`adm-tab ${selectedTab === 1 ? 'active' : ''}`}
+            onClick={() => handleTabChange(1)}
+          >
+            <FaHistory className="adm-icon" />
+            Delivery History
+            <span className="adm-tab-badge">
+              {deliveries.filter(d => d.status === 'delivered').length}
+            </span>
+          </button>
+          <button 
+            className={`adm-tab ${selectedTab === 2 ? 'active' : ''}`}
+            onClick={() => handleTabChange(2)}
+          >
+            <FaExclamationTriangle className="adm-icon" />
+            Failed Deliveries
+            <span className="adm-tab-badge">
+              {deliveries.filter(d => d.status === 'failed').length}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             </span>
           </button>
         </div>
       </div>
 
       <div className="adm-deliveries-grid">
+<<<<<<< HEAD
         {displayDeliveries.map((order) => {
           const syncStatus = checkDeliverySyncStatus(order);
           const isPartialDelivered = order.partialDelivery?.isPartial;
@@ -2323,16 +2696,160 @@ const DeliveryAgentPortal = () => {
             </div>
           );
         })}
+=======
+        {displayDeliveries.map((order) => (
+          <div key={order._id} className="adm-delivery-card">
+            <div className="adm-card-content">
+              <div className="adm-card-header">
+                <div className="adm-customer-info">
+                  <div className="adm-customer-name">{order.customerName}</div>
+                  
+                  <div className="adm-customer-detail">
+                    <FaMapMarkerAlt className="adm-icon" />
+                    <span>{order.address}</span>
+                  </div>
+
+                  <div className="adm-customer-detail">
+                    <FaPhone className="adm-icon" />
+                    <span>{order.customerPhone}</span>
+                  </div>
+
+                  <div className={getStatusClass(order.status)}>
+                    {order.status.replace(/_/g, ' ').toUpperCase()}
+                  </div>
+
+                  <div className="adm-plan-details">
+                    <div className="adm-plan-detail">
+                      <strong>Plan:</strong> {order.planDetails?.planName} ({order.planDetails?.size})
+                    </div>
+                    <div className="adm-plan-detail">
+                      <strong>Delivery Date:</strong> {formatDate(order.deliveryDate)}
+                    </div>
+
+                    {order.retryCount > 0 && (
+                      <div className="adm-retry-badge">
+                        Retry Attempt: {order.retryCount}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="adm-action-buttons">
+                  {/* Action Buttons based on status */}
+                  {order.status === 'assigned' && (
+                    <button
+                      className="adm-btn adm-btn-primary"
+                      onClick={() => handleAcceptDelivery(order._id)}
+                    >
+                      Accept Delivery
+                    </button>
+                  )}
+
+                  {order.status === 'accepted' && (
+                    <button
+                      className="adm-btn adm-btn-warning"
+                      onClick={() => handleMarkOutForDelivery(order._id)}
+                    >
+                      Start Delivery
+                    </button>
+                  )}
+
+                  {['accepted', 'out_for_delivery'].includes(order.status) && (
+                    <div className="adm-btn-group">
+                      <button
+                        className="adm-btn adm-btn-success adm-btn-small"
+                        onClick={() => {
+                          setSelectedOrder(order);
+                          setDeliveryDialogOpen(true);
+                        }}
+                      >
+                        <FaCheckCircle className="adm-icon" />
+                        Delivered
+                      </button>
+                      
+                      {/* Add Partial Delivery Button */}
+                      <button
+                        className="adm-btn adm-btn-warning adm-btn-small"
+                        onClick={() => {
+                          setOrderForPartial(order);
+                          setPartialDialogOpen(true);
+                        }}
+                      >
+                        <FaExclamationTriangle className="adm-icon" />
+                        Partial
+                      </button>
+                      
+                      <button
+                        className="adm-btn adm-btn-error adm-btn-small"
+                        onClick={() => {
+                          setSelectedOrder(order);
+                          setFailureDialogOpen(true);
+                        }}
+                      >
+                        <FaTimesCircle className="adm-icon" />
+                        Failed
+                      </button>
+                    </div>
+                  )}
+                  
+                  <button
+                    className="adm-btn adm-btn-outline adm-btn-small"
+                    onClick={() => openDirections(order.address)}
+                  >
+                    <FaDirections className="adm-icon" />
+                    Directions
+                  </button>
+                  
+                  <button
+                    className="adm-btn adm-btn-outline adm-btn-small"
+                    onClick={() => callCustomer(order.customerPhone)}
+                  >
+                    <FaPhone className="adm-icon" />
+                    Call Customer
+                  </button>
+                </div>
+              </div>
+
+              {order.status === 'delivered' && order.deliveredAt && (
+                <div className="adm-delivery-status adm-status-success">
+                  <div><strong>Delivered on:</strong> {formatDate(order.deliveredAt)}</div>
+                  {order.agentNotes && (
+                    <div><strong>Notes:</strong> {order.agentNotes}</div>
+                  )}
+                </div>
+              )}
+
+              {order.status === 'failed' && order.failedAt && (
+                <div className="adm-delivery-status adm-status-failed">
+                  <div><strong>Failed on:</strong> {formatDate(order.failedAt)}</div>
+                  <div><strong>Reason:</strong> {order.failedReason}</div>
+                  {order.agentNotes && (
+                    <div><strong>Notes:</strong> {order.agentNotes}</div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
         {displayDeliveries.length === 0 && (
           <div className="adm-empty-state">
             <h3>No deliveries found</h3>
             <p>
+<<<<<<< HEAD
               {selectedTab === 0
                 ? "You don't have any active deliveries assigned."
                 : selectedTab === 1
                   ? "No delivered orders found."
                   : "No failed deliveries found."}
+=======
+              {selectedTab === 0 
+                ? "You don't have any active deliveries assigned." 
+                : selectedTab === 1
+                ? "No delivery history found."
+                : "No failed deliveries found."}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             </p>
           </div>
         )}
@@ -2346,6 +2863,7 @@ const DeliveryAgentPortal = () => {
               <h2 className="adm-dialog-title">Mark Delivery as Successful</h2>
             </div>
             <div className="adm-dialog-content">
+<<<<<<< HEAD
               <p style={{ marginBottom: "1rem", color: "#7f8c8d" }}>
                 Confirm that you have successfully delivered to{" "}
                 {selectedOrder?.customerName}
@@ -2354,6 +2872,13 @@ const DeliveryAgentPortal = () => {
                 <label className="adm-form-label">
                   Delivery Notes (Optional)
                 </label>
+=======
+              <p style={{ marginBottom: '1rem', color: '#7f8c8d' }}>
+                Confirm that you have successfully delivered to {selectedOrder?.customerName}
+              </p>
+              <div className="adm-form-group">
+                <label className="adm-form-label">Delivery Notes (Optional)</label>
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                 <textarea
                   className="adm-form-textarea"
                   value={deliveryNotes}
@@ -2364,13 +2889,21 @@ const DeliveryAgentPortal = () => {
               </div>
             </div>
             <div className="adm-dialog-footer">
+<<<<<<< HEAD
               <button
+=======
+              <button 
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                 className="adm-btn adm-btn-outline"
                 onClick={() => setDeliveryDialogOpen(false)}
               >
                 Cancel
               </button>
+<<<<<<< HEAD
               <button
+=======
+              <button 
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                 className="adm-btn adm-btn-success"
                 onClick={handleMarkDelivered}
               >
@@ -2390,9 +2923,14 @@ const DeliveryAgentPortal = () => {
               <h2 className="adm-dialog-title">Mark Delivery as Failed</h2>
             </div>
             <div className="adm-dialog-content">
+<<<<<<< HEAD
               <p style={{ marginBottom: "1rem", color: "#7f8c8d" }}>
                 Please provide details about the delivery failure. The delivery
                 will be automatically rescheduled for tomorrow.
+=======
+              <p style={{ marginBottom: '1rem', color: '#7f8c8d' }}>
+                Please provide details about the delivery failure. The delivery will be automatically rescheduled for tomorrow.
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
               </p>
               <div className="adm-form-group">
                 <label className="adm-form-label">Failure Reason</label>
@@ -2402,6 +2940,7 @@ const DeliveryAgentPortal = () => {
                   onChange={(e) => setFailureReason(e.target.value)}
                 >
                   <option value="">Select a reason...</option>
+<<<<<<< HEAD
                   <option value="Customer not available">
                     Customer not available
                   </option>
@@ -2409,6 +2948,11 @@ const DeliveryAgentPortal = () => {
                   <option value="Customer refused delivery">
                     Customer refused delivery
                   </option>
+=======
+                  <option value="Customer not available">Customer not available</option>
+                  <option value="Wrong address">Wrong address</option>
+                  <option value="Customer refused delivery">Customer refused delivery</option>
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                   <option value="Safety concerns">Safety concerns</option>
                   <option value="Vehicle breakdown">Vehicle breakdown</option>
                   <option value="Other">Other</option>
@@ -2426,13 +2970,21 @@ const DeliveryAgentPortal = () => {
               </div>
             </div>
             <div className="adm-dialog-footer">
+<<<<<<< HEAD
               <button
+=======
+              <button 
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                 className="adm-btn adm-btn-outline"
                 onClick={() => setFailureDialogOpen(false)}
               >
                 Cancel
               </button>
+<<<<<<< HEAD
               <button
+=======
+              <button 
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                 className="adm-btn adm-btn-error"
                 onClick={handleMarkFailed}
               >
@@ -2458,7 +3010,11 @@ const DeliveryAgentPortal = () => {
       {/* Snackbar */}
       {snackbar.open && (
         <div className={`adm-snackbar ${snackbar.severity}`}>
+<<<<<<< HEAD
           {snackbar.severity === "success" ? (
+=======
+          {snackbar.severity === 'success' ? (
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             <FaCheckCircle className="adm-icon" />
           ) : (
             <FaTimesCircle className="adm-icon" />
@@ -2470,6 +3026,7 @@ const DeliveryAgentPortal = () => {
   );
 };
 
+<<<<<<< HEAD
 // Partial Delivery Dialog Component
 const PartialDeliveryDialog = ({ open, onClose, order, onConfirm }) => {
   const [deliveredKg, setDeliveredKg] = useState("");
@@ -2691,3 +3248,6 @@ const PartialDeliveryDialog = ({ open, onClose, order, onConfirm }) => {
 };
 
 export default DeliveryAgentPortal;
+=======
+export default DeliveryAgentPortal;
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b

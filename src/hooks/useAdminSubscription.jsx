@@ -1,3 +1,43 @@
+<<<<<<< HEAD
+=======
+// hooks/useAdminSubscription.js
+// import { useState, useCallback } from 'react';
+// import adminSubscriptionService from '../services/adminSubscriptionService';
+
+// export const useAdminSubscription = () => {
+//   const [subscriptions, setSubscriptions] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+//   const [analytics, setAnalytics] = useState(null);
+//   const [statistics, setStatistics] = useState(null);
+//   const [pagination, setPagination] = useState({
+//     page: 1,
+//     limit: 25,
+//     total: 0,
+//     totalPages: 0,
+//     hasNext: false,
+//     hasPrev: false
+//   });
+
+//   const fetchSubscriptions = useCallback(async (params = {}) => {
+//     try {
+//       setLoading(true);
+//       setError(null);
+//       const response = await adminSubscriptionService.getAdminSubscriptions(params);
+//       setSubscriptions(response.data || response || []);
+//       return { success: true, data: response.data || response };
+//     } catch (err) {
+//       const errorMessage = err.response?.data?.message || err.message || 'Failed to fetch subscriptions';
+//       setError(errorMessage);
+//       return { 
+//         success: false, 
+//         error: errorMessage 
+//       };
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
 // hooks/useAdminSubscription.js
 import { useState, useCallback } from 'react';

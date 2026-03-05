@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SubscriptionManagement.css
+=======
+/* SubscriptionManagement.css */
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 .asm-subscription-management {
   display: flex;
   flex-direction: column;
@@ -606,6 +610,7 @@ SubscriptionManagement.css
 .asm-stat-item strong {
   color: #007bff;
   font-size: 16px;
+<<<<<<< HEAD
 }
 
 
@@ -1041,4 +1046,6 @@ SubscriptionManagement.css
   .asm-page-size-selector {
     justify-content: center;
   }
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 }

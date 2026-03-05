@@ -397,6 +397,7 @@
 
 
 
+<<<<<<< HEAD
 // // components/SubscriptionManagement.js
 // import React, { useState, useEffect, useMemo, useCallback } from 'react';
 // import { FaSyncAlt, FaChartBar, FaPlus, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
@@ -856,6 +857,11 @@ import {
   FaCheckCircle,
   FaTimesCircle
 } from 'react-icons/fa';
+=======
+// components/SubscriptionManagement.js
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { FaSyncAlt, FaChartBar, FaPlus, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 import SubscriptionList from './SubscriptionList';
 import SubscriptionForm from './SubscriptionForm';
 import SubscriptionDetails from './SubscriptionDetails';
@@ -875,16 +881,22 @@ const SubscriptionManagement = () => {
   const [sortConfig, setSortConfig] = useState({ key: 'createdAt', direction: 'desc' });
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(25);
+<<<<<<< HEAD
   const [deliveries, setDeliveries] = useState([]);
   const [syncLoading, setSyncLoading] = useState(false);
   const [showSyncPanel, setShowSyncPanel] = useState(false);
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   const [filters, setFilters] = useState({
     search: '',
     status: 'all',
     planType: 'all',
     frequency: 'all',
     size: 'all',
+<<<<<<< HEAD
     syncStatus: 'all',
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     dateRange: { start: null, end: null }
   });
 
@@ -916,7 +928,10 @@ const SubscriptionManagement = () => {
       ...(filters.planType !== 'all' && { planType: filters.planType }),
       ...(filters.frequency !== 'all' && { frequency: filters.frequency }),
       ...(filters.size !== 'all' && { size: filters.size }),
+<<<<<<< HEAD
       ...(filters.syncStatus !== 'all' && { syncStatus: filters.syncStatus }),
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       ...(filters.search && { search: filters.search }),
       ...(filters.dateRange.start && { startDate: filters.dateRange.start }),
       ...(filters.dateRange.end && { endDate: filters.dateRange.end }),
@@ -927,6 +942,7 @@ const SubscriptionManagement = () => {
     setCurrentPage(page);
   }, [fetchSubscriptions, filters, sortConfig, limit]);
 
+<<<<<<< HEAD
   // Fetch deliveries for sync status
   const fetchDeliveries = useCallback(async () => {
     try {
@@ -1035,6 +1051,12 @@ const SubscriptionManagement = () => {
     setSyncLoading(false);
     return results;
   };
+=======
+  // Load subscriptions on component mount and when filters/sort/limit change
+  useEffect(() => {
+    loadSubscriptions(currentPage);
+  }, [loadSubscriptions]);
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
   const handleSort = useCallback((key) => {
     const newDirection = sortConfig.key === key && sortConfig.direction === 'asc' ? 'desc' : 'asc';
@@ -1073,9 +1095,12 @@ const SubscriptionManagement = () => {
             await cancelSubscription(id);
           }
           break;
+<<<<<<< HEAD
         case 'sync':
           await handleBulkSync(subscriptionIds);
           break;
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         default:
           console.warn('Unknown bulk action:', action);
           break;
@@ -1145,6 +1170,7 @@ const SubscriptionManagement = () => {
     }
   };
 
+<<<<<<< HEAD
   // Calculate statistics
   const stats = useMemo(() => {
     const total = pagination.total || 0;
@@ -1176,6 +1202,22 @@ const SubscriptionManagement = () => {
   const handleRefresh = () => {
     loadSubscriptions(currentPage);
     fetchDeliveries();
+=======
+  // Calculate statistics from server pagination data
+  const stats = useMemo(() => {
+    return {
+      total: pagination.total || 0,
+      active: subscriptions.filter(s => s.status === 'active').length,
+      paused: subscriptions.filter(s => s.status === 'paused').length,
+      cancelled: subscriptions.filter(s => s.status === 'cancelled').length,
+      expired: subscriptions.filter(s => s.status === 'expired').length,
+      pending: subscriptions.filter(s => s.status === 'pending').length
+    };
+  }, [subscriptions, pagination.total]);
+
+  const handleRefresh = () => {
+    loadSubscriptions(currentPage);
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   };
 
   const handleFiltersChange = (newFilters) => {
@@ -1190,7 +1232,10 @@ const SubscriptionManagement = () => {
       planType: 'all',
       frequency: 'all',
       size: 'all',
+<<<<<<< HEAD
       syncStatus: 'all',
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       dateRange: { start: null, end: null }
     });
     setCurrentPage(1);
@@ -1202,7 +1247,10 @@ const SubscriptionManagement = () => {
       ...(filters.planType !== 'all' && { planType: filters.planType }),
       ...(filters.frequency !== 'all' && { frequency: filters.frequency }),
       ...(filters.size !== 'all' && { size: filters.size }),
+<<<<<<< HEAD
       ...(filters.syncStatus !== 'all' && { syncStatus: filters.syncStatus }),
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       ...(filters.search && { search: filters.search }),
       ...(filters.dateRange.start && { startDate: filters.dateRange.start }),
       ...(filters.dateRange.end && { endDate: filters.dateRange.end }),
@@ -1212,6 +1260,7 @@ const SubscriptionManagement = () => {
     return exportSubscriptions(exportParams);
   };
 
+<<<<<<< HEAD
   // Get sync status class for display
   const getSyncStatusClass = (subscription) => {
     const syncStatus = checkSubscriptionSyncStatus(subscription);
@@ -1231,6 +1280,8 @@ const SubscriptionManagement = () => {
     }));
   }, [subscriptions, checkSubscriptionSyncStatus, getSubscriptionDeliveries]);
 
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   // Pagination Controls Component
   const PaginationControls = () => {
     if (!pagination || pagination.total <= 0 || pagination.totalPages <= 1) return null;
@@ -1284,6 +1335,7 @@ const SubscriptionManagement = () => {
     );
   };
 
+<<<<<<< HEAD
   // Sync Panel Component
   const SyncPanel = () => {
     if (!showSyncPanel) return null;
@@ -1391,22 +1443,31 @@ const SubscriptionManagement = () => {
     );
   };
 
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   if (view === 'details' && selectedSubscription) {
     return (
       <RoleBasedAccess permission="subscriptions:read">
         <SubscriptionDetails
           subscription={selectedSubscription}
+<<<<<<< HEAD
           deliveries={getSubscriptionDeliveries(selectedSubscription._id)}
           syncStatus={checkSubscriptionSyncStatus(selectedSubscription)}
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
           onBack={handleBackToList}
           onUpdateSubscription={handleUpdateSubscription}
           onDeleteSubscription={handleDeleteSubscription}
           onPauseSubscription={pauseSubscription}
           onResumeSubscription={resumeSubscription}
           onCancelSubscription={cancelSubscription}
+<<<<<<< HEAD
           onSyncSubscription={syncSubscriptionWithDeliveries}
           userRole={userRole}
           loading={syncLoading}
+=======
+          userRole={userRole}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         />
       </RoleBasedAccess>
     );
@@ -1424,6 +1485,7 @@ const SubscriptionManagement = () => {
     );
   }
 
+<<<<<<< HEAD
   if (view === 'analytics') {
     return (
       <RoleBasedAccess permission="subscriptions:analytics">
@@ -1438,6 +1500,22 @@ const SubscriptionManagement = () => {
       </RoleBasedAccess>
     );
   }
+=======
+  
+  // In SubscriptionManagement.js - Update the analytics section
+if (view === 'analytics') {
+  return (
+    <RoleBasedAccess permission="subscriptions:analytics">
+      <AnalyticsDashboard
+        onBack={() => {
+          setView('list');
+          loadSubscriptions(currentPage);
+        }}
+      />
+    </RoleBasedAccess>
+  );
+}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
   return (
     <div className="asm-subscription-management">
@@ -1445,6 +1523,7 @@ const SubscriptionManagement = () => {
         <div className="asm-header-main">
           <h1>Subscription Management</h1>
           <div className="asm-header-stats">
+<<<<<<< HEAD
             <div className="asm-stat-row">
               <span className="asm-stat-item">
                 Total: <strong>{stats.total}</strong>
@@ -1479,6 +1558,26 @@ const SubscriptionManagement = () => {
                 Active Deliveries: <strong>{stats.activeDeliveries}</strong>
               </span>
             </div>
+=======
+            <span className="asm-stat-item">
+              Total: <strong>{stats.total}</strong>
+            </span>
+            <span className="asm-stat-item">
+              Active: <strong>{stats.active}</strong>
+            </span>
+            <span className="asm-stat-item">
+              Paused: <strong>{stats.paused}</strong>
+            </span>
+            <span className="asm-stat-item">
+              Cancelled: <strong>{stats.cancelled}</strong>
+            </span>
+            <span className="asm-stat-item">
+              Expired: <strong>{stats.expired}</strong>
+            </span>
+            <span className="asm-stat-item">
+              Pending: <strong>{stats.pending}</strong>
+            </span>
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
           </div>
         </div>
         
@@ -1492,6 +1591,7 @@ const SubscriptionManagement = () => {
             <FaSyncAlt className={`asm-icon ${loading ? 'asm-spin' : ''}`} /> 
             {loading ? 'Refreshing...' : 'Refresh'}
           </button>
+<<<<<<< HEAD
 
           {stats.outOfSync > 0 && (
             <button
@@ -1503,6 +1603,8 @@ const SubscriptionManagement = () => {
               Sync ({stats.outOfSync})
             </button>
           )}
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
           
           <ExportTools onExport={handleExport} />
           
@@ -1528,13 +1630,19 @@ const SubscriptionManagement = () => {
         </div>
       </div>
 
+<<<<<<< HEAD
       <SyncPanel />
 
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       <SubscriptionFilters
         filters={filters}
         onFiltersChange={handleFiltersChange}
         onClearFilters={handleClearFilters}
+<<<<<<< HEAD
         showSyncFilter={true}
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       />
 
       {selectedSubscriptions.size > 0 && (
@@ -1542,12 +1650,19 @@ const SubscriptionManagement = () => {
           selectedCount={selectedSubscriptions.size}
           onBulkAction={handleBulkAction}
           userRole={userRole}
+<<<<<<< HEAD
           showSyncAction={stats.outOfSync > 0}
+=======
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         />
       )}
 
       <SubscriptionList
+<<<<<<< HEAD
         subscriptions={enhancedSubscriptions}
+=======
+        subscriptions={subscriptions}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         loading={loading}
         error={error}
         selectedSubscriptions={selectedSubscriptions}
@@ -1562,11 +1677,17 @@ const SubscriptionManagement = () => {
         onPauseSubscription={pauseSubscription}
         onResumeSubscription={resumeSubscription}
         onCancelSubscription={cancelSubscription}
+<<<<<<< HEAD
         onSyncSubscription={syncSubscriptionWithDeliveries}
         onSubscriptionSelect={handleSubscriptionSelect}
         onSelectAll={handleSelectAll}
         userRole={userRole}
         syncLoading={syncLoading}
+=======
+        onSubscriptionSelect={handleSubscriptionSelect}
+        onSelectAll={handleSelectAll}
+        userRole={userRole}
+>>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       />
 
       <PaginationControls />
