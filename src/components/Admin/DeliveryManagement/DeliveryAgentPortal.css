@@ -85,11 +85,7 @@
 
 /* Card Header */
 .adm-card-header {
-<<<<<<< HEAD
   /* display: flex; */
-=======
-  display: flex;
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1rem;
@@ -580,11 +576,7 @@
 }
 
 /* Dark mode support */
-<<<<<<< HEAD
 /* @media (prefers-color-scheme: dark) {
-=======
-@media (prefers-color-scheme: dark) {
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   .adm-agent-portal {
     background: #1a1a1a;
     color: #ffffff;
@@ -615,7 +607,6 @@
   .adm-customer-detail {
     color: #bdc3c7;
   }
-<<<<<<< HEAD
 } */
 
 
@@ -1044,6 +1035,4 @@
 
 .adm-partial-flash {
   animation: partialFlash 1s ease-in-out 3;
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 }

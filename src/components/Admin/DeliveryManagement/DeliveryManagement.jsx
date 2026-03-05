@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // // components/AdminDeliveryManagement.jsx
 // import React, { useState, useEffect } from "react";
 // import {
@@ -1333,9 +1332,6 @@
 
 
 
-=======
-// components/AdminDeliveryManagement.jsx
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 import React, { useState, useEffect } from "react";
 import {
   FaUserCheck,
@@ -1345,7 +1341,6 @@ import {
   FaPlus,
   FaEye,
   FaSearch,
-<<<<<<< HEAD
   FaPause,
   FaPlay,
   FaExclamationTriangle,
@@ -1355,10 +1350,6 @@ import {
 } from "react-icons/fa";
 import "./DeliveryManagement.css";
 import "./SharedPartialDeliveryStyle.css";
-=======
-} from "react-icons/fa";
-import "./DeliveryManagement.css";
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
 const AdminDeliveryManagement = () => {
   const [deliveries, setDeliveries] = useState([]);
@@ -1371,18 +1362,12 @@ const AdminDeliveryManagement = () => {
     status: "",
     deliveryDate: "",
     search: "",
-<<<<<<< HEAD
     remnantType: "",
     syncStatus: "",
   });
   const [assignDialogOpen, setAssignDialogOpen] = useState(false);
   const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
   const [resumeDialogOpen, setResumeDialogOpen] = useState(false);
-=======
-    remnantType: '',
-  });
-  const [assignDialogOpen, setAssignDialogOpen] = useState(false);
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   const [selectedDelivery, setSelectedDelivery] = useState(null);
   const [agents, setAgents] = useState([]);
   const [selectedAgent, setSelectedAgent] = useState("");
@@ -1398,10 +1383,6 @@ const AdminDeliveryManagement = () => {
     fetchAgents();
   }, [page, rowsPerPage, filters]);
 
-<<<<<<< HEAD
-=======
-  // Update the fetchDeliveries function to include remnantType filter
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   const fetchDeliveries = async () => {
     try {
       setLoading(true);
@@ -1422,16 +1403,12 @@ const AdminDeliveryManagement = () => {
       const data = await response.json();
 
       if (data.success) {
-<<<<<<< HEAD
         // Enhance deliveries with subscription sync status
         const enhancedDeliveries = data.data.map((delivery) => ({
           ...delivery,
           syncStatus: checkDeliverySyncStatus(delivery),
         }));
         setDeliveries(enhancedDeliveries);
-=======
-        setDeliveries(data.data);
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
         setTotal(data.total);
       }
     } catch (error) {
@@ -1471,10 +1448,6 @@ const AdminDeliveryManagement = () => {
         }
       );
       const data = await response.json();
-<<<<<<< HEAD
-=======
-      console.log("Agents API response:", data);
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
       if (data.success) {
         const agentsArray = Array.isArray(data.data)
@@ -1490,7 +1463,6 @@ const AdminDeliveryManagement = () => {
     }
   };
 
-<<<<<<< HEAD
   const checkDeliverySyncStatus = (delivery) => {
     if (!delivery.subscriptionId) return { isSynced: true };
 
@@ -1586,8 +1558,6 @@ const AdminDeliveryManagement = () => {
     }
   };
 
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   const handleAssignAgent = (delivery) => {
     setSelectedDelivery(delivery);
     setSelectedAgent("");
@@ -1671,15 +1641,11 @@ const AdminDeliveryManagement = () => {
       delivered: "adm-status-delivered",
       failed: "adm-status-failed",
       cancelled: "adm-status-pending",
-<<<<<<< HEAD
       paused: "adm-status-paused",
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
     };
     return `adm-status-chip ${statusMap[status] || "adm-status-pending"}`;
   };
 
-<<<<<<< HEAD
   const getSyncStatusClass = (syncStatus) => {
     if (!syncStatus.requiresSync) return "adm-sync-synced";
     return syncStatus.action === "pause"
@@ -1687,8 +1653,6 @@ const AdminDeliveryManagement = () => {
       : "adm-sync-needs-resume";
   };
 
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -1699,7 +1663,6 @@ const AdminDeliveryManagement = () => {
     });
   };
 
-<<<<<<< HEAD
   const formatDateShort = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
@@ -1709,8 +1672,6 @@ const AdminDeliveryManagement = () => {
     });
   };
 
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
@@ -1756,7 +1717,6 @@ const AdminDeliveryManagement = () => {
           <div className="adm-stat-label">Failed Today</div>
           <div className="adm-stat-value">{stats.today?.failed || 0}</div>
         </div>
-<<<<<<< HEAD
         <div className="adm-stat-card info">
           <div className="adm-stat-label">Out of Sync</div>
           <div className="adm-stat-value">
@@ -1769,8 +1729,6 @@ const AdminDeliveryManagement = () => {
             {deliveries.filter((d) => d.partialDelivery?.isPartial).length}
           </div>
         </div>
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
       </div>
 
       {/* Filters */}
@@ -1813,10 +1771,7 @@ const AdminDeliveryManagement = () => {
               <option value="out_for_delivery">Out for Delivery</option>
               <option value="delivered">Delivered</option>
               <option value="failed">Failed</option>
-<<<<<<< HEAD
               <option value="paused">Paused</option>
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             </select>
           </div>
           <div className="adm-form-group">
@@ -1830,7 +1785,6 @@ const AdminDeliveryManagement = () => {
               }
             />
           </div>
-<<<<<<< HEAD
           <div className="adm-form-group">
             <label className="adm-form-label">Delivery Type</label>
             <select
@@ -1842,23 +1796,6 @@ const AdminDeliveryManagement = () => {
               <option value="regular">Regular</option>
               <option value="partial">Partial</option>
               <option value="remnant">Remnant</option>
-=======
-
-          {/* In the filters section, add a filter for remnant deliveries */}
-          <div className="adm-form-group">
-            <label className="adm-form-label">Remnant Type</label>
-            <select
-              className="adm-form-select"
-              value={filters.remnantType || ""}
-              onChange={(e) =>
-                handleFilterChange("remnantType", e.target.value)
-              }
-            >
-              <option value="">All Types</option>
-              <option value="partial">Partial Deliveries</option>
-              <option value="remnant">Remnant Deliveries</option>
-              <option value="regular">Regular Deliveries</option>
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             </select>
           </div>
           <div className="adm-form-group">
@@ -1889,16 +1826,12 @@ const AdminDeliveryManagement = () => {
                 <th>Address</th>
                 <th>Agent</th>
                 <th>Status</th>
-<<<<<<< HEAD
                 <th>Delivery Type</th>
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
                 <th>Remnant</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
               {deliveries.map((delivery) => {
                 const syncStatus = delivery.syncStatus;
                 const isPartialDelivery = delivery.partialDelivery?.isPartial;
@@ -2101,92 +2034,6 @@ const AdminDeliveryManagement = () => {
                   </tr>
                 );
               })}
-=======
-              {deliveries.map((delivery) => (
-                <tr key={delivery._id}>
-                  <td>
-                    <div className="adm-customer-info">
-                      <div className="adm-customer-name">
-                        {delivery.customerName}
-                      </div>
-                      <div className="adm-customer-phone">
-                        {delivery.customerPhone}
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="adm-plan-info">
-                      <div className="adm-plan-name">
-                        {delivery.planDetails.planName}
-                      </div>
-                      <div className="adm-plan-details">
-                        {delivery.planDetails.size} •{" "}
-                        {delivery.planDetails.frequency}
-                        {delivery.isRemnantDelivery && (
-                          <span className="adm-remnant-badge">(Remnant)</span>
-                        )}
-                      </div>
-                    </div>
-                  </td>
-                  <td>{formatDate(delivery.deliveryDate)}</td>
-                  <td>
-                    <div className="adm-address">{delivery.address}</div>
-                  </td>
-                  <td>
-                    {delivery.deliveryAgent ? (
-                      <div className="adm-agent-info">
-                        {delivery.deliveryAgent.firstName}{" "}
-                        {delivery.deliveryAgent.lastName}
-                      </div>
-                    ) : (
-                      <div className="adm-agent-unassigned">Not assigned</div>
-                    )}
-                  </td>
-                  <td>
-                    <span className={getStatusClass(delivery.status)}>
-                      {delivery.status.replace(/_/g, " ").toUpperCase()}
-                    </span>
-                  </td>
-                  {/* ADD THE REMNANT COLUMN HERE */}
-                  <td>
-                    <div className="adm-remnant-info">
-                      {delivery.partialDelivery?.isPartial ? (
-                        <div className="adm-partial-delivery">
-                          <div className="adm-delivered-kg">
-                            Delivered: {delivery.deliveredKg}kg
-                          </div>
-                          <div className="adm-remaining-kg">
-                            Remaining: {delivery.remainingKg}kg
-                          </div>
-                        </div>
-                      ) : delivery.isRemnantDelivery ? (
-                        <div className="adm-remnant-delivery">
-                          <div className="adm-requested-kg">
-                            Requested: {delivery.requestedKg}kg
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="adm-no-remnant">
-                          <span className="adm-remnant-na">—</span>
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                  <td>
-                    {!delivery.deliveryAgent &&
-                      delivery.status === "pending" && (
-                        <button
-                          className="adm-btn adm-btn-outline adm-btn-small"
-                          onClick={() => handleAssignAgent(delivery)}
-                        >
-                          <FaUserCheck className="adm-icon" />
-                          Assign
-                        </button>
-                      )}
-                  </td>
-                </tr>
-              ))}
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             </tbody>
           </table>
 
@@ -2194,15 +2041,12 @@ const AdminDeliveryManagement = () => {
           <div className="adm-pagination">
             <div className="adm-pagination-info">
               Showing {deliveries.length} of {total} deliveries
-<<<<<<< HEAD
               {deliveries.filter((d) => d.partialDelivery?.isPartial).length >
                 0 && (
                 <span className="adm-partial-count">
                   • {deliveries.filter((d) => d.partialDelivery?.isPartial).length} partial
                 </span>
               )}
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
             </div>
             <div className="adm-pagination-controls">
               <select
@@ -2273,15 +2117,12 @@ const AdminDeliveryManagement = () => {
               <p style={{ marginBottom: "1rem", color: "#7f8c8d" }}>
                 Assign delivery to {selectedDelivery?.customerName} for{" "}
                 {selectedDelivery?.planDetails?.planName}
-<<<<<<< HEAD
                 {selectedDelivery?.partialDelivery?.isPartial && (
                   <span className="adm-partial-note">
                     <br />
                     <strong>Note:</strong> This is a partial delivery
                   </span>
                 )}
-=======
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
               </p>
               <div className="adm-form-group">
                 <label className="adm-form-label">Select Agent</label>
@@ -2332,8 +2173,4 @@ const AdminDeliveryManagement = () => {
   );
 };
 
-<<<<<<< HEAD
 export default AdminDeliveryManagement;
-=======
-export default AdminDeliveryManagement;
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b

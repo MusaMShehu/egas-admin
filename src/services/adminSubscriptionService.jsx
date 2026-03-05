@@ -3,11 +3,7 @@ import axios from "axios";
 // =============================
 // ✅ Configuration
 // =============================
-<<<<<<< HEAD
 const API_BASE_URL = "https://egas-server-1.onrender.com"; 
-=======
-const API_BASE_URL = "http://localhost:5000"; 
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
 // ✅ Safely get token from localStorage
 const getToken = () => {
@@ -64,19 +60,7 @@ api.interceptors.response.use(
   }
 );
 
-<<<<<<< HEAD
 
-=======
-// =============================
-// ✅ Admin Subscription Service
-// =============================
-// const adminSubscriptionService = {
-//   // Get all subscriptions
-//   async getAdminSubscriptions(params = {}) {
-//     const response = await api.get("/api/v1/admin/subscriptions", { params });
-//     return response.data;
-//   },
->>>>>>> 0246311345aff9fbd5c91b3f8a9ee3f8973a8d7b
 
 // services/adminSubscriptionService.js
 const adminSubscriptionService = {
