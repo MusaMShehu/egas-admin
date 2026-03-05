@@ -1,0 +1,184 @@
+import axios from "axios";
+
+// =============================
+// ✅ Configuration
+// =============================
+const API_BASE_URL = "https://egas-server-1.onrender.com"; 
+
+// ✅ Safely get token from localStorage
+const getToken = () => {
+  try {
+    const token = localStorage.getItem("token");
+    return token ? token.replace(/^"|"$/g, "") : null;
+  } catch (err) {
+    console.error("❌ Error reading token from localStorage:", err);
+    return null;
+  }
+};
+
+// ✅ Create shared axios instance
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 30000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// ✅ Automatically attach token
+api.interceptors.request.use(
+  (config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      console.log("✅ Token attached:", token.substring(0, 25) + "...");
+    } else {
+      console.warn("⚠️ No token found — request may fail with 401");
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// // ✅ Handle global errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const { response } = error;
+
+    if (response?.status === 401) {
+      console.warn("🚫 Unauthorized (401). Token may be invalid or expired.");
+    } else if (response?.status === 403) {
+      console.error("⛔ Forbidden! You don’t have permission for this action.");
+    } else if (response?.status === 404) {
+      console.error("❓ Resource not found:", response?.data?.message || error.message);
+    } else if (response?.status === 500) {
+      console.error("💥 Server error:", response?.data?.message || error.message);
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+
+
+// services/adminSubscriptionService.js
+const adminSubscriptionService = {
+  // Get all subscriptions - FIX PARAMS HANDLING
+  async getAdminSubscriptions(params = {}) {
+    // Ensure we're passing all parameters correctly
+    const queryParams = new URLSearchParams();
+    
+    // Add pagination params
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+    
+    // Add filter params
+    if (params.search) queryParams.append('search', params.search);
+    if (params.status && params.status !== 'all') queryParams.append('status', params.status);
+    if (params.planType && params.planType !== 'all') queryParams.append('planType', params.planType);
+    if (params.frequency && params.frequency !== 'all') queryParams.append('frequency', params.frequency);
+    if (params.size && params.size !== 'all') queryParams.append('size', params.size);
+    
+    // Add sort params
+    if (params.sort) queryParams.append('sort', params.sort);
+    if (params.select) queryParams.append('select', params.select);
+    
+    // Add date range params
+    if (params.startDate) queryParams.append('startDate', params.startDate);
+    if (params.endDate) queryParams.append('endDate', params.endDate);
+    
+    const queryString = queryParams.toString();
+    const url = `/api/v1/admin/subscriptions${queryString ? `?${queryString}` : ''}`;
+    
+    console.log('Fetching subscriptions from:', url); // Debug log
+    
+    const response = await api.get(url);
+    return response.data;
+  },
+  
+
+  // Get single subscription
+  async getAdminSubscription(id) {
+    const response = await api.get(`/api/v1/admin/subscriptions/${id}`);
+    return response.data;
+  },
+
+  // Create subscription
+  async createAdminSubscription(subscriptionData) {
+    const response = await api.post("/api/v1/admin/subscriptions", subscriptionData);
+    return response.data;
+  },
+
+  // Update subscription
+  async updateAdminSubscription(id, subscriptionData) {
+    const response = await api.put(`/api/v1/admin/subscriptions/${id}`, subscriptionData);
+    return response.data;
+  },
+
+  // Delete subscription
+  async deleteAdminSubscription(id) {
+    const response = await api.delete(`/api/v1/admin/subscriptions/${id}`);
+    return response.data;
+  },
+
+  // Bulk update
+  async bulkUpdateAdminSubscriptions(ids, updateData) {
+    const response = await api.put("/api/v1/admin/subscriptions/bulk/update", {
+      ids,
+      updateData,
+    });
+    return response.data;
+  },
+
+  // Bulk delete
+  async bulkDeleteAdminSubscriptions(ids) {
+    const response = await api.delete("/api/v1/admin/subscriptions/bulk/delete", {
+      data: { ids },
+    });
+    return response.data;
+  },
+
+  // Pause subscription
+  
+  async pauseAdminSubscription(id) {
+    const response = await api.put(`/api/v1/admin/subscriptions/${id}/pause`, {});
+    return response.data;
+  },
+  
+
+  // Resume subscription
+  async resumeAdminSubscription(id) {
+    const response = await api.put(`/api/v1/admin/subscriptions/${id}/resume`, {});
+    return response.data;
+  },
+
+  // Cancel subscription
+  async cancelAdminSubscription(id) {
+    const response = await api.put(`/api/v1/admin/subscriptions/${id}/cancel`, {});
+    return response.data;
+  },
+
+  // Get analytics overview
+  async getAdminAnalytics() {
+    const response = await api.get("/api/v1/admin/subscriptions/analytics/overview");
+    return response.data;
+  },
+
+  // Get statistics
+  async getAdminStatistics(params = {}) {
+    const response = await api.get("/api/v1/admin/subscriptions/statistics", { params });
+    return response.data;
+  },
+
+  // Export subscriptions (for file download)
+  async exportAdminSubscriptions(params = {}) {
+    const response = await api.get("/api/v1/admin/subscriptions/export", {
+      params,
+      responseType: "blob",
+    });
+    return response.data;
+  },
+};
+
+export default adminSubscriptionService;

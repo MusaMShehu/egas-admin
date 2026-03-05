@@ -1,0 +1,1044 @@
+SubscriptionManagement.css
+.asm-subscription-management {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Header Styles */
+.asm-subscription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.asm-header-main h1 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 28px;
+}
+
+.asm-header-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.asm-stat-item {
+  padding: 4px 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+  font-size: 14px;
+}
+
+.asm-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Button Styles */
+.asm-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.asm-btn-primary {
+  background: #3498db;
+  color: white;
+}
+
+.asm-btn-primary:hover {
+  background: #2980b9;
+}
+
+.asm-btn-outline {
+  background: white;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.asm-btn-outline:hover {
+  background: #f8f9fa;
+  border-color: #ccc;
+}
+
+.asm-btn-refresh {
+  background: #27ae60;
+  color: white;
+}
+
+.asm-btn-refresh:hover {
+  background: #219a52;
+}
+
+.asm-btn-create {
+  background: #e74c3c;
+  color: white;
+}
+
+.asm-btn-create:hover {
+  background: #c0392b;
+}
+
+/* Filter Styles */
+.asm-subscription-filters {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.asm-filters-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.asm-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.asm-filter-group label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #555;
+}
+
+.asm-filter-input, .asm-filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 150px;
+}
+
+.asm-filter-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Table Styles */
+.asm-subscription-list-container {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.asm-table-responsive {
+  overflow-x: auto;
+}
+
+.asm-subscription-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.asm-subscription-table th,
+.asm-subscription-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.asm-subscription-table th {
+  background: #e2e9ef;
+  font-weight: 600;
+  color: #555;
+  position: sticky;
+  top: 0;
+}
+
+.asm-sortable-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.asm-sortable-header:hover {
+  background: #e9ecef;
+}
+
+.asm-subscription-row:hover {
+  background: #f8f9fa;
+}
+
+.asm-subscription-row.asm-selected {
+  background: #e3f2fd;
+}
+
+/* Badge Styles */
+.asm-status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.asm-status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.asm-status-paused {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.asm-status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.asm-frequency-badge, .asm-size-badge {
+  padding: 4px 8px;
+  background: #e9ecef;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Bulk Actions */
+.asm-bulk-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.asm-bulk-actions-dropdown {
+  position: relative;
+}
+
+.asm-bulk-actions-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 200px;
+  padding: 8px;
+}
+
+.asm-bulk-action-group {
+  margin-bottom: 8px;
+}
+
+.asm-bulk-action-group h4 {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  color: #777;
+  text-transform: uppercase;
+}
+
+.asm-bulk-action-group button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.asm-bulk-action-group button:hover {
+  background: #f8f9fa;
+}
+
+.asm-bulk-action-danger {
+  color: #e74c3c !important;
+}
+
+/* Add these styles to your existing CSS */
+
+/* Plan Type Badges */
+.asm-type-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.asm-type-custom {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.asm-type-onetime {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.asm-type-emergency {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.asm-type-preset {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.asm-type-default {
+  background: #f5f5f5;
+  color: #616161;
+}
+
+/* Remaining Days Badge */
+.asm-days-badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.asm-days-badge.asm-expiring {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* Subscription Reference */
+.asm-subscription-reference {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Action Buttons */
+.asm-btn-action {
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  margin: 2px;
+}
+
+.asm-btn-view {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.asm-btn-edit {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.asm-btn-pause {
+  background: #fff3e0;
+  color: #ff9800;
+}
+
+.asm-btn-resume {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.asm-btn-cancel {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.asm-btn-delete {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.asm-btn-action:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.asm-btn-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Status Badges Updates */
+.asm-status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.asm-status-expired {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .asm-subscription-management {
+    padding: 12px;
+  }
+  
+  .asm-subscription-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .asm-header-actions {
+    justify-content: stretch;
+  }
+  
+  .asm-header-actions .asm-btn {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .asm-filters-main {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .asm-filter-actions {
+    margin-left: 0;
+    justify-content: center;
+  }
+  
+  .asm-subscription-table {
+    font-size: 14px;
+  }
+  
+  .asm-subscription-table th,
+  .asm-subscription-table td {
+    padding: 8px 4px;
+  }
+  
+  .asm-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Loading and Empty States */
+.asm-loading-container,
+.asm-error-container,
+.asm-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.asm-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.asm-error-icon, .asm-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.asm-error-container h3,
+.asm-empty-state h3 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+}
+
+.asm-error-container p,
+.asm-empty-state p {
+  margin: 0 0 16px 0;
+  color: #7f8c8d;
+}
+
+
+
+
+
+
+/* Add to SubscriptionManagement.css */
+.asm-pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.asm-pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.asm-pagination-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.asm-pagination-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.asm-page-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.asm-current-page {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.asm-total-pages {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.asm-page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asm-page-size-selector label {
+  font-size: 14px;
+  color: #495057;
+}
+
+.asm-limit-select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.asm-total-count {
+  padding: 8px 16px;
+  background: #e9ecef;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #495057;
+  font-weight: 500;
+}
+
+.asm-table-footer {
+  padding: 15px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* Update header stats */
+.asm-header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.asm-stat-item {
+  background: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.asm-stat-item strong {
+  color: #007bff;
+  font-size: 16px;
+}
+
+
+
+
+
+/* SubscriptionManagement.css */
+.asm-subscription-management {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.asm-subscription-header {
+  margin-bottom: 24px;
+}
+
+.asm-header-main {
+  margin-bottom: 16px;
+}
+
+.asm-subscription-header h1 {
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.asm-header-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.asm-stat-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.asm-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+.asm-stat-item strong {
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.asm-stat-item.success {
+  border-left: 4px solid #27ae60;
+  background: #d1f7c4;
+}
+
+.asm-stat-item.warning {
+  border-left: 4px solid #f39c12;
+  background: #fff3cd;
+}
+
+.asm-stat-item.error {
+  border-left: 4px solid #e74c3c;
+  background: #f5b7b1;
+}
+
+.asm-stat-item.info {
+  border-left: 4px solid #3498db;
+  background: #d6eaf8;
+}
+
+.asm-stat-item.pending {
+  border-left: 4px solid #9b59b6;
+  background: #e8daef;
+}
+
+.asm-stat-item.sync {
+  border-left: 4px solid #f39c12;
+  background: #fff3cd;
+}
+
+.asm-stat-item.revenue {
+  border-left: 4px solid #27ae60;
+  background: #d1f7c4;
+}
+
+.asm-stat-item.deliveries {
+  border-left: 4px solid #3498db;
+  background: #d6eaf8;
+}
+
+.asm-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.asm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.asm-btn-refresh {
+  background: #3498db;
+  color: white;
+}
+
+.asm-btn-refresh:hover {
+  background: #2980b9;
+}
+
+.asm-btn-sync {
+  background: #f39c12;
+  color: white;
+}
+
+.asm-btn-sync:hover {
+  background: #d68910;
+}
+
+.asm-btn-sync.active {
+  background: #e67e22;
+}
+
+.asm-btn-analytics {
+  background: #9b59b6;
+  color: white;
+}
+
+.asm-btn-analytics:hover {
+  background: #8e44ad;
+}
+
+.asm-btn-create {
+  background: #27ae60;
+  color: white;
+}
+
+.asm-btn-create:hover {
+  background: #229954;
+}
+
+.asm-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.asm-icon {
+  font-size: 14px;
+}
+
+.asm-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Sync Panel */
+.asm-sync-panel {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.asm-sync-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.asm-sync-panel-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asm-sync-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.asm-sync-stat {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.asm-sync-stat-label {
+  display: block;
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-bottom: 8px;
+}
+
+.asm-sync-stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.asm-sync-actions {
+  padding: 0 20px 20px;
+}
+
+.asm-out-of-sync-list {
+  padding: 0 20px 20px;
+}
+
+.asm-out-of-sync-list h4 {
+  margin: 0 0 16px 0;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.asm-out-of-sync-table {
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.asm-out-of-sync-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1.5fr 1fr;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #e1e8ed;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+.asm-out-of-sync-item {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1.5fr 1fr;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e8ed;
+  align-items: center;
+}
+
+.asm-out-of-sync-item:last-child {
+  border-bottom: none;
+}
+
+.asm-customer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.asm-customer-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.asm-customer-email {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.asm-plan-info {
+  color: #2c3e50;
+}
+
+.asm-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.asm-status.active {
+  background: #d1f7c4;
+  color: #27ae60;
+}
+
+.asm-status.paused {
+  background: #fff3cd;
+  color: #f39c12;
+}
+
+.asm-out-of-sync-count {
+  font-weight: 600;
+  color: #f39c12;
+  text-align: center;
+}
+
+.asm-sync-action {
+  text-align: center;
+}
+
+.asm-btn-xs {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.asm-all-synced {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.asm-all-synced .asm-icon {
+  font-size: 48px;
+  color: #27ae60;
+  margin-bottom: 16px;
+}
+
+.asm-all-synced p {
+  color: #27ae60;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Pagination */
+.asm-pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.asm-pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.asm-pagination-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.asm-page-info {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.asm-current-page {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.asm-total-pages {
+  color: #7f8c8d;
+}
+
+.asm-page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asm-limit-select {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.asm-total-count {
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .asm-stat-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .asm-header-actions {
+    flex-direction: column;
+  }
+  
+  .asm-sync-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .asm-out-of-sync-header,
+  .asm-out-of-sync-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .asm-pagination-controls {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .asm-page-size-selector {
+    justify-content: center;
+  }
+}
