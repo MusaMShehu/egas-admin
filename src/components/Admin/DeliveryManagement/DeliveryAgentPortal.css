@@ -1,0 +1,1038 @@
+/* styles/delivery-agent.css */
+
+/* Main Container */
+.adm-agent-portal {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Header Section */
+.adm-agent-header {
+  margin-bottom: 2rem;
+}
+
+.adm-agent-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Tabs Navigation */
+.adm-tabs {
+  display: flex;
+  background: white;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.adm-tab {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: #7f8c8d;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+.adm-tab:hover {
+  background: #ecf0f1;
+  color: #3498db;
+}
+
+.adm-tab.active {
+  background: #3498db;
+  color: white;
+}
+
+/* Delivery Cards Grid */
+.adm-deliveries-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+/* Delivery Card */
+.adm-delivery-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.adm-delivery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.adm-card-content {
+  padding: 1.5rem;
+}
+
+/* Card Header */
+.adm-card-header {
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.adm-customer-info {
+  flex: 1;
+}
+
+.adm-customer-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.adm-customer-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #7f8c8d;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.adm-customer-detail .adm-icon {
+  color: #3498db;
+  width: 16px;
+}
+
+/* Status Chip */
+.adm-status-chip {
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.adm-status-assigned {
+  background: #3498db;
+  color: white;
+}
+
+.adm-status-accepted {
+  background: #9b59b6;
+  color: white;
+}
+
+.adm-status-out_for_delivery {
+  background: #f39c12;
+  color: white;
+}
+
+.adm-status-delivered {
+  background: #27ae60;
+  color: white;
+}
+
+.adm-status-failed {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Plan Details */
+.adm-plan-details {
+  margin-bottom: 1rem;
+}
+
+.adm-plan-detail {
+  margin-bottom: 0.25rem;
+  color: #2c3e50;
+}
+
+.adm-plan-detail strong {
+  color: #34495e;
+}
+
+.adm-retry-badge {
+  display: inline-block;
+  background: #f39c12;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Action Buttons */
+.adm-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 140px;
+}
+
+.adm-btn {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.adm-btn-primary {
+  background: #3498db;
+  color: white;
+}
+
+.adm-btn-primary:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+.adm-btn-warning {
+  background: #f39c12;
+  color: white;
+}
+
+.adm-btn-warning:hover {
+  background: #e67e22;
+  transform: translateY(-1px);
+}
+
+.adm-btn-success {
+  background: #27ae60;
+  color: white;
+}
+
+.adm-btn-success:hover {
+  background: #219a52;
+  transform: translateY(-1px);
+}
+
+.adm-btn-outline {
+  background: transparent;
+  border: 2px solid #3498db;
+  color: #3498db;
+}
+
+.adm-btn-outline:hover {
+  background: #3498db;
+  color: white;
+}
+
+.adm-btn-error {
+  background: #e74c3c;
+  color: white;
+}
+
+.adm-btn-error:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+.adm-btn-small {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+/* Delivery Status Sections */
+.adm-delivery-status {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.adm-status-success {
+  background: #d5f4e6;
+  color: #27ae60;
+  border-left: 4px solid #27ae60;
+}
+
+.adm-status-failed {
+  background: #fdeaea;
+  color: #e74c3c;
+  border-left: 4px solid #e74c3c;
+}
+
+.adm-status-success strong,
+.adm-status-failed strong {
+  color: inherit;
+}
+
+/* Empty State */
+.adm-empty-state {
+  grid-column: 1 -1;
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.adm-empty-state h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.adm-empty-state p {
+  color: #7f8c8d;
+  margin-bottom: 0;
+}
+
+/* Loading Spinner */
+.adm-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  grid-column: 1 -1;
+}
+
+.adm-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ecf0f1;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: adm-spin 1s linear infinite;
+}
+
+@keyframes adm-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dialog/Modal */
+.adm-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.adm-dialog {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.adm-dialog-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.adm-dialog-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.adm-dialog-content {
+  padding: 1.5rem;
+}
+
+.adm-dialog-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #ecf0f1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Form Elements */
+.adm-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.adm-form-label {
+  display: block;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.adm-form-input,
+.adm-form-select,
+.adm-form-textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #ecf0f1;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background: white;
+  font-family: inherit;
+}
+
+.adm-form-input:focus,
+.adm-form-select:focus,
+.adm-form-textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.adm-form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Snackbar */
+.adm-snackbar {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+.adm-snackbar.success {
+  background: #27ae60;
+}
+
+.adm-snackbar.error {
+  background: #e74c3c;
+}
+
+.adm-snackbar.warning {
+  background: #f39c12;
+}
+
+
+/* Tab badges */
+.adm-tab-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  margin-left: 8px;
+}
+
+/* Status-specific styles */
+.adm-status-assigned {
+  background: #ff9800;
+  color: white;
+}
+
+.adm-status-accepted {
+  background: #2196f3;
+  color: white;
+}
+
+.adm-status-out_for_delivery {
+  background: #9c27b0;
+  color: white;
+}
+
+.adm-status-delivered {
+  background: #4caf50;
+  color: white;
+}
+
+.adm-status-failed {
+  background: #f44336;
+  color: white;
+}
+
+.adm-retry-badge {
+  background: #ff5722;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .adm-agent-portal {
+    padding: 0.5rem;
+  }
+
+  .adm-agent-title {
+    font-size: 1.5rem;
+  }
+
+  .adm-deliveries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-card-header {
+    flex-direction: column;
+  }
+
+  .adm-action-buttons {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .adm-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .adm-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .adm-tab {
+    min-width: 120px;
+    padding: 0.75rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .adm-agent-title {
+    font-size: 1.25rem;
+  }
+
+  .adm-card-content {
+    padding: 1rem;
+  }
+
+  .adm-action-buttons {
+    flex-direction: column;
+  }
+
+  .adm-btn {
+    width: 100%;
+  }
+
+  .adm-dialog {
+    margin: 0.5rem;
+    max-height: calc(100vh - 1rem);
+  }
+
+  .adm-dialog-footer {
+    flex-direction: column;
+  }
+
+  .adm-snackbar {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: none;
+  }
+}
+
+/* Button Group for Multiple Actions */
+.adm-btn-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Icon Styles */
+.adm-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Dark mode support */
+/* @media (prefers-color-scheme: dark) {
+  .adm-agent-portal {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .adm-delivery-card,
+  .adm-empty-state,
+  .adm-dialog,
+  .adm-tabs {
+    background: #2d2d2d;
+    color: #ffffff;
+  }
+
+  .adm-form-input,
+  .adm-form-select,
+  .adm-form-textarea {
+    background: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #ffffff;
+  }
+
+  .adm-form-input:focus,
+  .adm-form-select:focus,
+  .adm-form-textarea:focus {
+    border-color: #3498db;
+  }
+
+  .adm-customer-detail {
+    color: #bdc3c7;
+  }
+} */
+
+
+
+/* Add these styles to your existing DeliveryAgentPortal.css */
+
+/* Sync Warning Banner */
+.adm-sync-warning-banner {
+  background: #fff3cd;
+  border-left: 4px solid #f39c12;
+  padding: 12px 15px;
+  margin: -15px -15px 15px -15px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #856404;
+}
+
+.adm-sync-warning-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.adm-sync-warning-content strong {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.adm-sync-warning-content span {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.adm-pause-date {
+  font-size: 11px !important;
+  font-style: italic;
+}
+
+.adm-sync-warning-banner .adm-icon {
+  color: #f39c12;
+  font-size: 18px;
+}
+
+/* Paused Delivery Card Styling */
+.adm-delivery-card.paused {
+  border-left: 4px solid #f39c12;
+  background: #fef9e7;
+}
+
+.adm-delivery-card.paused .adm-card-content {
+  opacity: 0.9;
+}
+
+/* Paused Status Chip */
+.adm-status-paused {
+  background: #fff3cd !important;
+  color: #856404 !important;
+  border: 1px solid #ffeaa7 !important;
+}
+
+/* Paused Info Section */
+.adm-paused-info {
+  background: #fff3cd;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 15px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid #ffeaa7;
+}
+
+.adm-paused-info .adm-icon {
+  color: #f39c12;
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.adm-paused-info strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #856404;
+}
+
+.adm-paused-info div {
+  font-size: 13px;
+  color: #856404;
+  line-height: 1.4;
+}
+
+/* Subscription Info */
+.adm-subscription-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.adm-subscription-info .adm-icon-sm {
+  color: #7f8c8d;
+  font-size: 12px;
+}
+
+.adm-subscription-status {
+  font-weight: 500;
+}
+
+.status-active {
+  color: #27ae60;
+}
+
+.status-paused {
+  color: #f39c12;
+}
+
+/* Original Date Display */
+.adm-original-date {
+  font-size: 11px;
+  color: #7f8c8d;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* Enhanced Action Buttons */
+.adm-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adm-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adm-navigation-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Subscription status indicator in plan details */
+.adm-plan-details .adm-subscription-info {
+  margin-top: 4px;
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .adm-sync-warning-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .adm-sync-warning-banner .adm-btn {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .adm-action-buttons {
+    flex-direction: column;
+  }
+  
+  .adm-btn-group {
+    flex-direction: column;
+  }
+  
+  .adm-navigation-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Animation for sync actions */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.adm-btn:active {
+  animation: pulse 0.3s;
+}
+
+/* Hover effects for paused deliveries */
+.adm-delivery-card.paused:hover {
+  background: #fef5e7;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Sync button styling */
+.adm-btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* Subscription action button tooltip */
+.adm-action-buttons button[title] {
+  position: relative;
+}
+
+.adm-action-buttons button[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+  margin-bottom: 5px;
+}
+
+
+
+/* ===== PARTIAL DELIVERY STYLES ===== */
+
+/* Partial Delivery Badge */
+.adm-partial-badge {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Partial Delivery Card Styles */
+.adm-delivery-card.partial {
+  border-left: 4px solid #f39c12;
+}
+
+/* Partial Info Section */
+.adm-partial-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  padding: 10px;
+  background: linear-gradient(135deg, #fff8e1, #fff3cd);
+  border-radius: 8px;
+  border: 1px solid #ffeaa7;
+}
+
+.adm-delivered-kg {
+  color: #27ae60;
+  font-weight: 700;
+  background: rgba(39, 174, 96, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adm-remaining-kg {
+  color: #e67e22;
+  font-weight: 700;
+  background: rgba(230, 126, 34, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Partial Details Section */
+.adm-partial-details {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border: 2px solid #ffb74d;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 12px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { border-color: #ffb74d; }
+  50% { border-color: #ff9800; }
+  100% { border-color: #ffb74d; }
+}
+
+.adm-partial-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.adm-partial-breakdown span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.adm-remnant-note {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  border: 1px solid #28a745;
+  color: #155724;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Partial Button States */
+.adm-btn-partial {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+  border: none;
+}
+
+.adm-btn-partial:hover {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+}
+
+.adm-btn-partial:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Partial Dialog Specific */
+.adm-existing-partial {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  border-left: 4px solid #27ae60;
+}
+
+.adm-existing-partial p {
+  margin: 6px 0;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.adm-order-info {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #dee2e6;
+}
+
+.adm-order-info p {
+  margin: 8px 0;
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+.adm-order-info strong {
+  color: #2c3e50;
+  min-width: 120px;
+  display: inline-block;
+}
+
+.adm-input-hint {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Partial Status Indicator */
+.adm-partial-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.adm-partial-status-recorded {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.adm-partial-status-available {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+/* Partial Delivery Animation */
+@keyframes partialFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.adm-partial-flash {
+  animation: partialFlash 1s ease-in-out 3;
+}
