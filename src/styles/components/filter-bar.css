@@ -1,0 +1,97 @@
+/* src/styles/components/filter-bar.css */
+
+.ui-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: flex-end;
+}
+
+.ui-filter-bar__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  flex: 1;
+  align-items: flex-end;
+}
+
+.ui-filter-bar__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.ui-filter-bar__label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ui-filter-bar__group select,
+.ui-filter-bar__group input[type="date"],
+.ui-filter-bar__group input[type="number"],
+.ui-filter-bar__group input[type="text"] {
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.ui-filter-bar__group select:focus,
+.ui-filter-bar__group input:focus {
+  outline: none;
+  border-color: var(--egas-primary);
+  box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.12);
+}
+
+.ui-filter-bar__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.ui-filter-bar__search-icon {
+  position: absolute;
+  left: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  pointer-events: none;
+}
+.ui-filter-bar__search > input {
+  padding-left: var(--sp-8);
+  padding-right: var(--sp-8);
+}
+.ui-filter-bar__clear {
+  position: absolute;
+  right: var(--sp-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--gray-100);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+.ui-filter-bar__clear:hover { background: var(--gray-200); color: var(--text-primary); }
+
+.ui-filter-bar__extra {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .ui-filter-bar__fields { flex-direction: column; align-items: stretch; }
+  .ui-filter-bar__group { min-width: 0 !important; }
+  .ui-filter-bar__extra { width: 100%; justify-content: flex-end; }
+}

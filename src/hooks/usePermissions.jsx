@@ -1,73 +1,63 @@
-// // hooks/usePermissions.js
+// // src/hooks/usePermissions.js
 // import { useAuth } from '../contexts/AuthContext';
 
-// // Enhanced permissions configuration with more roles and permissions
 // const permissionsConfig = {
 //   'super-admin': [
-//     'subscriptions:read',
-//     'subscriptions:create',
-//     'subscriptions:update',
-//     'subscriptions:delete',
-//     'subscriptions:bulk',
-//     'subscriptions:analytics',
-//     'subscriptions:export',
-//     'subscriptions:manage',
-//     'users:read',
-//     'users:create',
-//     'users:update',
-//     'users:delete',
-//     'users:manage',
+//     'subscriptions:read', 'subscriptions:create', 'subscriptions:update', 'subscriptions:delete',
+//     'subscriptions:bulk', 'subscriptions:analytics', 'subscriptions:export', 'subscriptions:manage',
+//     'users:read', 'users:create', 'users:update', 'users:delete', 'users:manage',
+//     'orders:read', 'orders:update', 'orders:delete', 'orders:bulk',
+//     'deliveries:read', 'deliveries:create', 'deliveries:update', 'deliveries:delete',
+//     'products:read', 'products:create', 'products:update', 'products:delete',
+//     'reports:read', 'reports:create', 'reports:export',
+//     'settings:read', 'settings:update',
+//     'system:admin',
+//   ],
+//   admin: [
+//     'subscriptions:read', 'subscriptions:create', 'subscriptions:update', 'subscriptions:delete',
+//     'subscriptions:bulk', 'subscriptions:analytics', 'subscriptions:export', 'subscriptions:manage',
+//     'users:read', 'users:create', 'users:update', 'users:delete',
+//     'orders:read', 'orders:update',
+//     'deliveries:read', 'deliveries:create', 'deliveries:update',
+//     'products:read', 'products:create', 'products:update',
+//     'reports:read', 'reports:export',
 //     'settings:read',
-//     'settings:update',
-//     'system:admin'
 //   ],
-//   'admin': [
-//     'subscriptions:read',
-//     'subscriptions:create',
-//     'subscriptions:update',
-//     'subscriptions:delete',
-//     'subscriptions:bulk',
-//     'subscriptions:analytics',
-//     'subscriptions:export',
-//     'subscriptions:manage',
+//   manager: [
+//     'subscriptions:read', 'subscriptions:create', 'subscriptions:update', 'subscriptions:analytics',
 //     'users:read',
-//     'users:create',
-//     'users:update',
-//     'settings:read'
+//     'orders:read', 'orders:update',
+//     'deliveries:read', 'deliveries:create',
+//     'products:read',
+//     'reports:read',
 //   ],
-//   'manager': [
+//   operator: [
+//     'subscriptions:read', 'subscriptions:update',
+//     'orders:read', 'orders:update',
+//     'deliveries:read', 'deliveries:update',
+//   ],
+//   viewer: [
 //     'subscriptions:read',
-//     'subscriptions:create',
-//     'subscriptions:update',
-//     'subscriptions:analytics',
-//     'subscriptions:export',
-//     'users:read'
+//     'users:read',
+//     'orders:read',
+//     'deliveries:read',
+//     'products:read',
 //   ],
-//   'operator': [
+//   delivery: [
+//     'deliveries:read', 'deliveries:update',
+//   ],
+//   support: [
 //     'subscriptions:read',
-//     'subscriptions:update',
-//     'subscriptions:create'
+//     'orders:read',
+//     'users:read',
 //   ],
-//   'viewer': [
-//     'subscriptions:read',
-//     'users:read'
-//   ],
-//   'customer': [
-//     'subscriptions:read:own',
-//     'subscriptions:create:own',
-//     'subscriptions:update:own'
-//   ]
 // };
 
 // export const usePermissions = () => {
-//   // ✅ Use your existing Auth hook directly
 //   const { user } = useAuth();
 
 //   const hasPermission = (permission) => {
-//     if (!user?.role) {
-//       console.warn('usePermissions: No user or role found');
-//       return false;
-//     }
+//     if (!user?.role) return false;
 //     const perms = permissionsConfig[user.role] || [];
 //     return perms.includes(permission);
 //   };
@@ -75,8 +65,7 @@
 //   const hasAnyPermission = (perms) => perms?.some(hasPermission);
 //   const hasAllPermissions = (perms) => perms?.every(hasPermission);
 //   const canPerformAction = (action, resource) => hasPermission(`${resource}:${action}`);
-//   const canAccessOwn = (resource) =>
-//     hasPermission(`${resource}:read:own`) || hasPermission(`${resource}:read`);
+
 //   const getAvailablePermissions = () => permissionsConfig[user?.role] || [];
 
 //   return {
@@ -84,7 +73,6 @@
 //     hasAnyPermission,
 //     hasAllPermissions,
 //     canPerformAction,
-//     canAccessOwn,
 //     getAvailablePermissions,
 //     userRole: user?.role,
 //     isSuperAdmin: user?.role === 'super-admin',
@@ -92,7 +80,6 @@
 //     isManager: ['manager', 'admin', 'super-admin'].includes(user?.role),
 //     isOperator: ['operator', 'manager', 'admin', 'super-admin'].includes(user?.role),
 //     isViewer: ['viewer', 'operator', 'manager', 'admin', 'super-admin'].includes(user?.role),
-//     isCustomer: user?.role === 'customer',
 //     currentUser: user,
 //   };
 // };
@@ -121,91 +108,47 @@
 
 
 
-
-
 // src/hooks/usePermissions.js
+import { useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-
-const permissionsConfig = {
-  'super-admin': [
-    'subscriptions:read', 'subscriptions:create', 'subscriptions:update', 'subscriptions:delete',
-    'subscriptions:bulk', 'subscriptions:analytics', 'subscriptions:export', 'subscriptions:manage',
-    'users:read', 'users:create', 'users:update', 'users:delete', 'users:manage',
-    'orders:read', 'orders:update', 'orders:delete', 'orders:bulk',
-    'deliveries:read', 'deliveries:create', 'deliveries:update', 'deliveries:delete',
-    'products:read', 'products:create', 'products:update', 'products:delete',
-    'reports:read', 'reports:create', 'reports:export',
-    'settings:read', 'settings:update',
-    'system:admin',
-  ],
-  admin: [
-    'subscriptions:read', 'subscriptions:create', 'subscriptions:update', 'subscriptions:delete',
-    'subscriptions:bulk', 'subscriptions:analytics', 'subscriptions:export', 'subscriptions:manage',
-    'users:read', 'users:create', 'users:update', 'users:delete',
-    'orders:read', 'orders:update',
-    'deliveries:read', 'deliveries:create', 'deliveries:update',
-    'products:read', 'products:create', 'products:update',
-    'reports:read', 'reports:export',
-    'settings:read',
-  ],
-  manager: [
-    'subscriptions:read', 'subscriptions:create', 'subscriptions:update', 'subscriptions:analytics',
-    'users:read',
-    'orders:read', 'orders:update',
-    'deliveries:read', 'deliveries:create',
-    'products:read',
-    'reports:read',
-  ],
-  operator: [
-    'subscriptions:read', 'subscriptions:update',
-    'orders:read', 'orders:update',
-    'deliveries:read', 'deliveries:update',
-  ],
-  viewer: [
-    'subscriptions:read',
-    'users:read',
-    'orders:read',
-    'deliveries:read',
-    'products:read',
-  ],
-  delivery: [
-    'deliveries:read', 'deliveries:update',
-  ],
-  support: [
-    'subscriptions:read',
-    'orders:read',
-    'users:read',
-  ],
-};
+import {
+  getPermissionsForRole,
+  normalizeRole,
+  isAdminRole,
+  isPlantRole,
+  isDeliveryRole,
+} from '../utils/permissions';
 
 export const usePermissions = () => {
   const { user } = useAuth();
+  const role = normalizeRole(user?.role);
 
-  const hasPermission = (permission) => {
-    if (!user?.role) return false;
-    const perms = permissionsConfig[user.role] || [];
-    return perms.includes(permission);
-  };
+  const perms = useMemo(() => getPermissionsForRole(role), [role]);
 
-  const hasAnyPermission = (perms) => perms?.some(hasPermission);
-  const hasAllPermissions = (perms) => perms?.every(hasPermission);
-  const canPerformAction = (action, resource) => hasPermission(`${resource}:${action}`);
+  const hasPermission = (key) => perms.has(key);
+  const hasAnyPermission = (keys = []) => keys.some((k) => perms.has(k));
+  const hasAllPermissions = (keys = []) => keys.every((k) => perms.has(k));
 
-  const getAvailablePermissions = () => permissionsConfig[user?.role] || [];
+  const isSuperAdmin = role === 'super-admin';
+  const isAdmin = isAdminRole(role);
+  const isCustomerCare = role === 'customer_care';
+  const isDelivery = isDeliveryRole(role);
+  const isPlantUser = isPlantRole(role);
+  const isCustomer = role === 'user';
 
   return {
+    user,
+    userRole: role,
     hasPermission,
     hasAnyPermission,
     hasAllPermissions,
-    canPerformAction,
-    getAvailablePermissions,
-    userRole: user?.role,
-    isSuperAdmin: user?.role === 'super-admin',
-    isAdmin: ['admin', 'super-admin'].includes(user?.role),
-    isManager: ['manager', 'admin', 'super-admin'].includes(user?.role),
-    isOperator: ['operator', 'manager', 'admin', 'super-admin'].includes(user?.role),
-    isViewer: ['viewer', 'operator', 'manager', 'admin', 'super-admin'].includes(user?.role),
-    currentUser: user,
+    isSuperAdmin,
+    isAdmin,
+    isCustomerCare,
+    isDelivery,
+    isPlantUser,
+    isCustomer,
+    permissionsList: Array.from(perms),
   };
 };
 

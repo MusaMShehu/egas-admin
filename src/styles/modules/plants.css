@@ -1,0 +1,137 @@
+/* src/styles/modules/plants.css */
+.plants-page { display: flex; flex-direction: column; gap: var(--sp-5); }
+
+.plant-code { font-size: var(--fs-xs); color: var(--text-muted); }
+.plant-muted { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.plant-filters { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+.plant-filters__group { display: flex; flex-direction: column; gap: var(--sp-2); min-width: 180px; }
+.plant-filters__group--grow { flex: 1; min-width: 220px; }
+.plant-filters__group label {
+  font-size: var(--fs-xs); font-weight: var(--fw-semibold);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.plant-filters__group select,
+.plant-filters__group input {
+  width: 100%; padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-md);
+  font-size: var(--fs-sm); background: var(--surface); color: var(--text-primary);
+}
+.plant-filters__group select:focus,
+.plant-filters__group input:focus {
+  outline: none; border-color: var(--egas-primary);
+  box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.12);
+}
+.plant-search { position: relative; display: flex; align-items: center; }
+.plant-search > svg {
+  position: absolute; left: var(--sp-3);
+  color: var(--text-muted); font-size: var(--fs-sm); pointer-events: none;
+}
+.plant-search > input { padding-left: var(--sp-8); }
+.plant-actions { display: flex; gap: var(--sp-1); justify-content: flex-end; }
+
+.plant-error {
+  padding: var(--sp-6); background: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border); border-radius: var(--radius-lg);
+  color: var(--color-danger);
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  text-align: center;
+}
+.plant-empty {
+  padding: var(--sp-8) var(--sp-4); text-align: center; color: var(--text-muted);
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+}
+.plant-empty i { font-size: 2rem; opacity: 0.5; }
+
+.plant-detail { display: flex; flex-direction: column; gap: var(--sp-4); }
+.plant-detail__tabs {
+  display: flex; gap: var(--sp-1); border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.plant-tab {
+  padding: var(--sp-2) var(--sp-3); border: none; background: transparent;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  font-size: var(--fs-sm); font-weight: var(--fw-medium);
+  color: var(--text-secondary); cursor: pointer; white-space: nowrap;
+  position: relative;
+}
+.plant-tab:hover { color: var(--text-primary); background: var(--surface-alt); }
+.plant-tab--active { color: var(--egas-primary); background: var(--egas-primary-soft); }
+.plant-tab--active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 2px; background: var(--egas-primary);
+}
+.plant-detail__toolbar { display: flex; justify-content: flex-end; margin-bottom: var(--sp-3); }
+
+.plant-overview { display: flex; flex-direction: column; gap: var(--sp-4); }
+.plant-overview__grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--sp-3);
+}
+.plant-cell {
+  padding: var(--sp-3); background: var(--surface-alt);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+}
+.plant-cell__label {
+  font-size: var(--fs-xs); color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--sp-1);
+}
+.plant-cell__value { font-size: var(--fs-sm); color: var(--text-primary); }
+
+
+/* Section headings inside the detail */
+.plant-section {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+.plant-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-strong, #111827);
+}
+
+/* GPS block */
+.plant-gps {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.plant-map-link {
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary, #2563eb);
+  text-decoration: none;
+}
+.plant-map-link:hover { text-decoration: underline; }
+
+/* Cell that spans two columns in overview grid */
+.plant-cell--span-2 { grid-column: span 2; }
+
+/* Operating days row */
+.plant-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.plant-day {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+.plant-day input { accent-color: var(--primary, #2563eb); }

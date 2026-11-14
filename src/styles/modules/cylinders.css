@@ -1,0 +1,109 @@
+/* src/styles/modules/cylinders.css */
+.cylinders-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.cyl-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.cyl-search > svg {
+  position: absolute;
+  left: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  pointer-events: none;
+}
+.cyl-search > input {
+  padding-left: var(--sp-8);
+}
+
+.cyl__muted {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* ─── Cylinder detail modal ─── */
+.cyl-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.cyl-detail__tabs {
+  display: flex;
+  gap: var(--sp-1);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.cyl-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+}
+.cyl-tab:hover { color: var(--text-primary); background: var(--surface-alt); }
+.cyl-tab--active {
+  color: var(--egas-primary);
+  background: var(--egas-primary-soft);
+}
+.cyl-tab--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--egas-primary);
+}
+
+.cyl-overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.cyl-overview__row {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.cyl-overview__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-3);
+}
+.cyl-cell {
+  padding: var(--sp-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.cyl-cell__label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--sp-1);
+}
+.cyl-cell__value {
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+
+.cyl-muted {
+  padding: var(--sp-4);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}

@@ -1,0 +1,178 @@
+/* src/styles/modules/deliveries.css */
+.deliveries-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.del-muted {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.deliveries-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-3);
+}
+.del-filters {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.del-filters__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 180px;
+}
+.del-filters__group--grow {
+  flex: 1;
+  min-width: 220px;
+}
+.del-filters__group label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.del-filters__group select,
+.del-filters__group input {
+  width: 100%;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+}
+.del-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.del-search > svg {
+  position: absolute;
+  left: var(--sp-3);
+  color: var(--text-muted);
+}
+.del-search > input {
+  padding-left: var(--sp-8);
+}
+.del-address {
+  max-width: 240px;
+  font-size: var(--fs-sm);
+}
+.del-actions {
+  display: flex;
+  gap: var(--sp-1);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.del-empty {
+  padding: var(--sp-8);
+  text-align: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.del-empty i {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+.deliveries-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--sp-2);
+}
+.del-actions { display: flex; gap: var(--sp-1); flex-wrap: wrap; justify-content: flex-end; }
+.del-actions .ui-btn { transition: transform var(--t-fast), box-shadow var(--t-fast); }
+.del-actions .ui-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+/* ── Delivery detail modal ── */
+.dd { display: flex; flex-direction: column; gap: var(--sp-4); }
+.dd__status { display: inline-flex; gap: var(--sp-2); flex-wrap: wrap; }
+.dd__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-3);
+}
+.dd-cell {
+  padding: var(--sp-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.dd-cell__label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--sp-1);
+}
+.dd-cell__value { font-size: var(--fs-sm); color: var(--text-primary); word-break: break-word; }
+.dd-cell__value.is-danger { color: var(--color-danger); font-weight: var(--fw-semibold); }
+.dd-muted { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.dd-weights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+.dd-weight {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+
+.dd-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.dd-step {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  opacity: 0.7;
+}
+.dd-step--done { opacity: 1; }
+.dd-step__icon {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+   font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.dd-step--done .dd-step__icon {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+.dd-step__label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+.dd-step__time {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}

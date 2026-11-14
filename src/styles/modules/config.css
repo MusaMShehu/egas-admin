@@ -1,0 +1,88 @@
+/* src/styles/modules/config.css */
+.config-page { display: flex; flex-direction: column; gap: var(--sp-5); }
+
+.config-tabs {
+  display: flex; gap: var(--sp-2);
+  padding: var(--sp-2); background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+}
+.config-tab {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4); border: none; background: transparent;
+  border-radius: var(--radius-md); font-size: var(--fs-sm);
+  font-weight: var(--fw-medium); color: var(--text-secondary); cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.config-tab:hover { background: var(--surface-alt); color: var(--text-primary); }
+.config-tab--active { background: var(--egas-primary-soft); color: var(--egas-primary); }
+
+.config-filters { display: flex; gap: var(--sp-3); align-items: flex-end; flex-wrap: wrap; }
+.config-filters__group { display: flex; flex-direction: column; gap: var(--sp-2); min-width: 180px; }
+.config-filters__group--grow { flex: 1; }
+.config-filters__group label {
+  font-size: var(--fs-xs); font-weight: var(--fw-semibold);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.config-filters__group select {
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-md);
+  font-size: var(--fs-sm); background: var(--surface); color: var(--text-primary);
+}
+.config-filters__group select:focus {
+  outline: none; border-color: var(--egas-primary);
+  box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.12);
+}
+
+.config-list,
+.flag-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.config-item,
+.flag-item {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: var(--sp-3);
+}
+.config-item__key,
+.flag-item__key {
+  display: flex; align-items: center; gap: var(--sp-2);
+  flex-wrap: wrap; margin-bottom: var(--sp-2);
+}
+.config-item__desc,
+.flag-item__desc {
+  font-size: var(--fs-xs); color: var(--text-muted);
+  margin-bottom: var(--sp-1);
+}
+.config-item__code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  padding: var(--sp-1) var(--sp-2);
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  word-break: break-all;
+}
+
+.config-empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--sp-2); padding: var(--sp-6); text-align: center;
+  color: var(--text-muted);
+}
+.config-empty i { font-size: 2rem; opacity: 0.5; }
+
+.config-error {
+  padding: var(--sp-6); background: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border); border-radius: var(--radius-lg);
+  color: var(--color-danger);
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  text-align: center;
+}
+
+.config-editor { border-top: 3px solid var(--egas-primary); }
+.config-editor__title {
+  margin: 0 0 var(--sp-4) 0;
+  font-size: var(--fs-lg); color: var(--text-primary);
+}
+.config-editor__actions {
+  display: flex; gap: var(--sp-2); justify-content: flex-end;
+  margin-top: var(--sp-4);
+}

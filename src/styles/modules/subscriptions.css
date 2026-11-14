@@ -1,0 +1,155 @@
+.subs-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.sub-muted {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.subs-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--sp-3);
+}
+.subs-filters {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.subs-filters__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 180px;
+}
+.subs-filters__group--grow {
+  flex: 1;
+  min-width: 220px;
+}
+.subs-filters__group label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.subs-filters__group select,
+.subs-filters__group input {
+  width: 100%;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+}
+.subs-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.subs-search > svg {
+  position: absolute;
+  left: var(--sp-3);
+  color: var(--text-muted);
+}
+.subs-search > input {
+  padding-left: var(--sp-8);
+}
+.subs-bulk__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.subs-bulk__actions {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.subs-actions {
+  display: flex;
+  gap: var(--sp-1);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.subs-empty {
+  padding: var(--sp-8);
+  text-align: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.subs-empty i {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+.sub-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.sub-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--sp-3);
+}
+.sub-cell {
+  padding: var(--sp-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.sub-cell__label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--sp-1);
+}
+.sub-cell__value {
+  font-size: var(--fs-sm);
+}
+.sub-detail__customer {
+  padding: var(--sp-3);
+  background: var(--surface-alt);
+  border-radius: var(--radius-md);
+}
+.sub-detail__customer h4 {
+  margin: 0 0 var(--sp-2);
+}
+
+
+
+
+
+
+
+
+
+/* ── Compact stat strip ── */
+.subs-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--sp-2);
+}
+
+/* ── Colourful action buttons ── */
+.sub-actions { display: flex; gap: var(--sp-1); flex-wrap: wrap; justify-content: flex-end; }
+.sub-actions .ui-btn { transition: transform var(--t-fast), box-shadow var(--t-fast); }
+.sub-actions .ui-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+/* ── Email lookup feedback ── */
+.subs-lookup-ok {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  background: var(--color-success-soft);
+  border: 1px solid var(--color-success-border);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  color: #065f46;
+}

@@ -1,0 +1,59 @@
+/* src/styles/modules/remnant.css */
+.remnant-page { display: flex; flex-direction: column; gap: var(--sp-5); }
+
+.rem-muted { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.rem-filters { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+.rem-filters__group { display: flex; flex-direction: column; gap: var(--sp-2); min-width: 180px; }
+.rem-filters__group--grow { flex: 1; min-width: 220px; }
+.rem-filters__group label {
+  font-size: var(--fs-xs); font-weight: var(--fw-semibold);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.rem-filters__group select,
+.rem-filters__group input {
+  width: 100%; padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-md);
+  font-size: var(--fs-sm); background: var(--surface); color: var(--text-primary);
+}
+.rem-filters__group select:focus,
+.rem-filters__group input:focus {
+  outline: none; border-color: var(--egas-primary);
+  box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.12);
+}
+
+.rem-search { position: relative; display: flex; align-items: center; }
+.rem-search > svg {
+  position: absolute; left: var(--sp-3);
+  color: var(--text-muted); font-size: var(--fs-sm); pointer-events: none;
+}
+.rem-search > input { padding-left: var(--sp-8); }
+
+.rem-delta--pos { color: var(--color-success); font-weight: var(--fw-semibold); }
+.rem-delta--neg { color: var(--color-danger); font-weight: var(--fw-semibold); }
+
+.rem-error {
+  padding: var(--sp-6); background: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border); border-radius: var(--radius-lg);
+  color: var(--color-danger);
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  text-align: center;
+}
+.rem-empty {
+  padding: var(--sp-8) var(--sp-4); text-align: center; color: var(--text-muted);
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+}
+.rem-empty i { font-size: 2rem; opacity: 0.5; }
+
+.rem-verify {
+  display: flex; gap: var(--sp-3); align-items: center;
+  background: var(--surface); border-left: 3px solid var(--border);
+}
+.rem-verify--ok { border-left-color: var(--color-success); }
+.rem-verify--bad { border-left-color: var(--color-danger); }
+.rem-verify__icon { font-size: 1.2rem; }
+.rem-verify--ok .rem-verify__icon { color: var(--color-success); }
+.rem-verify--bad .rem-verify__icon { color: var(--color-danger); }
+.rem-verify__text {
+  font-size: var(--fs-xs); color: var(--text-muted); margin-top: var(--sp-1);
+}

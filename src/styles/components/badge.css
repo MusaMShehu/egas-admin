@@ -1,0 +1,89 @@
+/* src/styles/components/badge.css */
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.ui-badge--md {
+  padding: 3px var(--sp-3);
+  font-size: var(--fs-xs);
+}
+
+.ui-badge--sm {
+  padding: 1px var(--sp-2);
+  font-size: 0.68rem;
+}
+
+.ui-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.ui-badge__icon {
+  display: inline-flex;
+  font-size: 0.85em;
+}
+
+/* Variants */
+.ui-badge--success {
+  background: var(--color-success-soft);
+  color: #065f46;
+  border-color: var(--color-success-border);
+}
+.ui-badge--warning {
+  background: var(--color-warning-soft);
+  color: #92400e;
+  border-color: var(--color-warning-border);
+}
+.ui-badge--danger {
+  background: var(--color-danger-soft);
+  color: #991b1b;
+  border-color: var(--color-danger-border);
+}
+.ui-badge--info {
+  background: var(--color-info-soft);
+  color: #075985;
+  border-color: var(--color-info-border);
+}
+.ui-badge--neutral {
+  background: var(--gray-100);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+.ui-badge--primary {
+  background: var(--egas-primary-soft);
+  color: #4c1d95;
+  border-color: var(--egas-primary-border);
+}
+.ui-badge--remnant {
+  background: var(--color-remnant-soft);
+  color: #6b21a8;
+  border-color: var(--color-remnant-border);
+}
+.ui-badge--partial {
+  background: var(--color-partial-soft);
+  color: #92400e;
+  border-color: #fbbf24;
+}
+
+/* Dark mode text overrides */
+@media (prefers-color-scheme: dark) {
+  .ui-badge--success { color: #6ee7b7; }
+  .ui-badge--warning { color: #fcd34d; }
+  .ui-badge--danger  { color: #fca5a5; }
+  .ui-badge--info    { color: #7dd3fc; }
+  .ui-badge--primary { color: #c4b5fd; }
+  .ui-badge--remnant { color: #d8b4fe; }
+  .ui-badge--partial { color: #fbbf24; }
+}

@@ -1,0 +1,60 @@
+/* src/styles/components/mini-stat.css */
+.mini-stat {
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-height: 74px;
+  transition:
+    transform var(--t-fast),
+    box-shadow var(--t-fast);
+}
+.mini-stat:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.mini-stat__label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: var(--fw-semibold);
+}
+.mini-stat__value {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+.mini-stat--primary {
+  border-left-color: var(--egas-primary);
+}
+.mini-stat--success {
+  border-left-color: var(--color-success);
+}
+.mini-stat--warning {
+  border-left-color: var(--color-warning);
+}
+.mini-stat--danger {
+  border-left-color: var(--color-danger);
+}
+.mini-stat--info {
+  border-left-color: var(--color-info);
+}
+.mini-stat--remnant {
+  border-left-color: var(--color-remnant);
+}
+
+@media (max-width: 640px) {
+  .mini-stat {
+    padding: var(--sp-2) var(--sp-3);
+    min-height: 64px;
+  }
+  .mini-stat__value {
+    font-size: var(--fs-base);
+  }
+}

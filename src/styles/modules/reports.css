@@ -1,0 +1,255 @@
+/* src/styles/modules/reports.css */
+.reports-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.reports-filters {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.reports-filters__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 160px;
+}
+.reports-filters__group label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.reports-filters__group input {
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+}
+.reports-tabs {
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+.reports-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.reports-tab:hover {
+  background: var(--surface-alt);
+  color: var(--text-primary);
+}
+.reports-tab--active {
+  background: var(--egas-primary-soft);
+  color: var(--egas-primary);
+}
+.report-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.report-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-3);
+}
+.report-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.report-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--fs-sm);
+}
+.report-list li:last-child {
+  border-bottom: none;
+}
+.realtime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--sp-3);
+}
+.rep-cell {
+  padding: var(--sp-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.rep-cell__label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--sp-1);
+}
+.rep-cell__value {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+}
+
+
+
+
+
+
+
+
+
+
+/* ── Date range presets ── */
+.reports-presets {
+  display: flex;
+  gap: var(--sp-1);
+  flex-wrap: wrap;
+}
+.reports-preset {
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+.reports-preset:hover {
+  border-color: var(--egas-primary);
+  color: var(--egas-primary);
+}
+.reports-preset--active {
+  background: var(--egas-primary);
+  border-color: var(--egas-primary);
+  color: var(--text-inverse);
+}
+
+/* ── Compact stat rows ── */
+.report-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sp-2);
+}
+.report-trend {
+  font-size: 0.65rem;
+  font-weight: var(--fw-semibold);
+  padding: 1px var(--sp-1);
+  border-radius: var(--radius-full);
+  margin-top: var(--sp-1);
+  align-self: flex-start;
+}
+.report-trend.up { background: var(--color-success-soft); color: #065f46; }
+.report-trend.down { background: var(--color-danger-soft); color: #991b1b; }
+
+/* ── Two-column grid ── */
+.report-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+@media (max-width: 900px) {
+  .report-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ── Business health hero ── */
+.health-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+}
+.health-score {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-1);
+  padding: var(--sp-4) var(--sp-6);
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--border);
+  flex-shrink: 0;
+}
+.health-score--success { border-color: var(--color-success); background: var(--color-success-soft); }
+.health-score--info    { border-color: var(--color-info);    background: var(--color-info-soft); }
+.health-score--warning { border-color: var(--color-warning); background: var(--color-warning-soft); }
+.health-score--danger  { border-color: var(--color-danger);  background: var(--color-danger-soft); }
+.health-score__number {
+  font-size: 3rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--text-primary);
+}
+.health-score__suffix {
+  font-size: var(--fs-base);
+  color: var(--text-muted);
+}
+.health-hero__text { flex: 1; min-width: 200px; }
+.health-hero__text h2 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-xl);
+  color: var(--text-primary);
+}
+.health-hero__text p {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+/* ── Health components ── */
+.health-components {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--sp-3);
+}
+.health-comp { display: flex; flex-direction: column; gap: var(--sp-2); }
+.health-comp__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+.health-bar {
+  height: 6px;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.health-bar__fill {
+  height: 100%;
+  background: var(--egas-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--t-slow);
+}
+.health-comp__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.health-comp__detail strong { color: var(--text-primary); }
