@@ -65,4 +65,5 @@
   height: 32px;
   padding: 0 var(--sp-2);
   border: 1px solid var(--border);
-  border-radius:
+  border-radius: 25px,
+}
